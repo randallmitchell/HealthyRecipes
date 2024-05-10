@@ -1,0 +1,33 @@
+- Tailwind
+
+{ 'air_force_blue': { DEFAULT: '#5C868E', 100: '#131b1c', 200: '#253539', 300: '#385055', 400: '#4a6b72', 500: '#5c868e', 600: '#7aa0a8', 700: '#9bb8be', 800: '#bcd0d3', 900: '#dee7e9' }, 'olive': { DEFAULT: '#7B7917', 100: '#191905', 200: '#323109', 300: '#4b4a0e', 400: '#636213', 500: '#7b7917', 600: '#b9b723', 700: '#dcda49', 800: '#e8e685', 900: '#f3f3c2' }, 'dark_goldenrod': { DEFAULT: '#AD801C', 100: '#221906', 200: '#44320b', 300: '#674b11', 400: '#896516', 500: '#ad801c', 600: '#dca329', 700: '#e5ba5e', 800: '#eed194', 900: '#f6e8c9' }, 'quinacridone_magenta': { DEFAULT: '#894963', 100: '#1b0f14', 200: '#361d27', 300: '#522c3b', 400: '#6d3b4f', 500: '#894963', 600: '#ab637f', 700: '#c08a9f', 800: '#d5b1bf', 900: '#ead8df' }, 'saffron': { DEFAULT: '#F0C00D', 100: '#302703', 200: '#614d05', 300: '#917408', 400: '#c29a0a', 500: '#f0c00d', 600: '#f5cd3d', 700: '#f7da6e', 800: '#fae69e', 900: '#fcf3cf' } }
+
+- CSV
+
+5C868E,7B7917,AD801C,894963,F0C00D
+
+- With #
+
+#5C868E, #7B7917, #AD801C, #894963, #F0C00D
+
+- Array
+
+["5C868E","7B7917","AD801C","894963","F0C00D"]
+
+- Object
+
+{"Air Force blue":"5C868E","Olive":"7B7917","Dark goldenrod":"AD801C","Quinacridone magenta":"894963","Saffron":"F0C00D"}
+
+- Extended Array
+
+[{"name":"Air Force blue","hex":"5C868E","rgb":[92,134,142],"cmyk":[35,6,0,44],"hsb":[190,35,56],"hsl":[190,21,46],"lab":[53,-12,-9]},{"name":"Olive","hex":"7B7917","rgb":[123,121,23],"cmyk":[0,2,81,52],"hsb":[59,81,48],"hsl":[59,68,29],"lab":[49,-11,49]},{"name":"Dark goldenrod","hex":"AD801C","rgb":[173,128,28],"cmyk":[0,26,84,32],"hsb":[41,84,68],"hsl":[41,72,39],"lab":[56,9,56]},{"name":"Quinacridone magenta","hex":"894963","rgb":[137,73,99],"cmyk":[0,47,28,46],"hsb":[336,47,54],"hsl":[336,30,41],"lab":[40,30,-3]},{"name":"Saffron","hex":"F0C00D","rgb":[240,192,13],"cmyk":[0,20,95,6],"hsb":[47,95,94],"hsl":[47,90,50],"lab":[80,4,80]}]
+
+- XML
+
+<palette>
+  <color altname="Ceramic" name="Air Force blue" hex="5C868E" r="92" g="134" b="142" />
+  <color altname="Chutney" name="Olive" hex="7B7917" r="123" g="121" b="23" />
+  <color altname="Corriander" name="Dark goldenrod" hex="AD801C" r="173" g="128" b="28" />
+  <color altname="Lotus" name="Quinacridone magenta" hex="894963" r="137" g="73" b="99" />
+  <color altname="Saffron" name="Saffron" hex="F0C00D" r="240" g="192" b="13" />
+</palette>
