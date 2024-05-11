@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.methodsignature.healthyrecipes.ui.features.onboarding.OnboardingFlow
 import com.methodsignature.healthyrecipes.ui.theme.HealthyRecipesTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,8 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             HealthyRecipesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
+                    OnboardingFlow(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
