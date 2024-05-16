@@ -35,9 +35,10 @@ fun SplashScreenContent(modifier: Modifier) {
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = "show one of many random silly hellos",
+                text = "one of many random silly hellos",
                 style = TextStyle(
                     fontSize = 24.sp,
+                    color = Colors.Saffron,
                 ),
                 textAlign = TextAlign.Center
             )
