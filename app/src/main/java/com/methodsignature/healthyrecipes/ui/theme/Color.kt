@@ -25,7 +25,7 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 object Colors {
-    val Basmati = Color(0xFFFFFFFF)
+    val Basmati = Color(0xFFFDFDFD)
     val Naan = Color(0xFFFFFFF0)
     val Ceramic = Color(0xFF5C868E)
     val Chutney = Color(0xFF7B7917)
