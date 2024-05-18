@@ -60,7 +60,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation(libs.junit)
     implementation(libs.square.moshi.kotlin)
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.android.compiler)
@@ -68,6 +67,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    testImplementation(libs.junit)
+    testImplementation(libs.kluent)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlin.coroutine.test)
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
 }

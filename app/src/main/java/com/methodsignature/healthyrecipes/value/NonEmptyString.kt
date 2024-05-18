@@ -6,7 +6,7 @@ package com.methodsignature.healthyrecipes.value
 @Suppress("DataClassPrivateConstructor")
 data class NonEmptyString private constructor(val value: String) {
     companion object {
-        fun fromString(from: String?): NonEmptyString? {
+        fun from(from: String?): NonEmptyString? {
             return if (from.isNullOrEmpty()) {
                 null
             } else {
