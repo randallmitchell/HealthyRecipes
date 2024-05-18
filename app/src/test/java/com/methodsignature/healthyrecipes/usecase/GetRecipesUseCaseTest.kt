@@ -1,7 +1,7 @@
 package com.methodsignature.healthyrecipes.usecase
 
 import com.methodsignature.healthyrecipes.service.api.RecipeService
-import com.methodsignature.healthyrecipes.value.NonEmptyString
+import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
@@ -15,15 +15,15 @@ class GetRecipesUseCaseTest {
 
     private object TestData {
         val ingredient = RecipeService.Ingredient(
-            units = NonEmptyString.from("1 1/2")!!,
-            unitType = NonEmptyString.from("cups")!!,
-            name = NonEmptyString.from("magic")!!,
+            units = NonBlankString.from("1 1/2")!!,
+            unitType = NonBlankString.from("cups")!!,
+            name = NonBlankString.from("magic")!!,
         )
         val ingredients = listOf(ingredient)
 
         val recipe = RecipeService.Recipe(
-            id = NonEmptyString.from("1")!!,
-            description = NonEmptyString.from("description")!!,
+            id = NonBlankString.from("1")!!,
+            description = NonBlankString.from("description")!!,
             servings = "",
             instructions = "",
             ingredients = ingredients
