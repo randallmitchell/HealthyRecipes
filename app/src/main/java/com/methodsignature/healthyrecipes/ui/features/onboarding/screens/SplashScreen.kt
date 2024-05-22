@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
@@ -12,19 +14,37 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.methodsignature.healthyrecipes.language.DoNothing
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
+import com.methodsignature.healthyrecipes.ui.features.onboarding.screens.splash.SplashScreenViewModel
 import com.methodsignature.healthyrecipes.ui.theme.Colors
 
 @Composable
 fun SplashScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: SplashScreenViewModel = viewModel(),
+    onSplashScreenComplete: () -> Unit,
 ) {
-    SplashScreenContent(modifier = modifier)
+    val uiState by viewModel.uiState.collectAsState()
+    SplashScreenContent(
+        modifier = modifier,
+        uiState = uiState,
+        onSplashScreenComplete = onSplashScreenComplete,
+        onNavigated = {
+            viewModel.onNavigated()
+        }
+    )
 }
 
 @Composable
-fun SplashScreenContent(modifier: Modifier) {
+fun SplashScreenContent(
+    modifier: Modifier,
+    uiState: SplashScreenViewModel.UiState,
+    onSplashScreenComplete: () -> Unit,
+    onNavigated: () -> Unit,
+) {
     Screen(
         background = { Background(color = Colors.Lotus) }
     ) {
@@ -43,11 +63,25 @@ fun SplashScreenContent(modifier: Modifier) {
                 textAlign = TextAlign.Center
             )
         }
+
+        when (uiState) {
+            SplashScreenViewModel.UiState.Displaying -> DoNothing
+            SplashScreenViewModel.UiState.Navigated -> DoNothing
+            is SplashScreenViewModel.UiState.Navigating -> {
+                onSplashScreenComplete()
+                onNavigated()
+            }
+        }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Displaying")
 @Composable
 fun SplashScreenPreview() {
-    SplashScreenContent(modifier = Modifier)
+    SplashScreenContent(
+        modifier = Modifier,
+        uiState = SplashScreenViewModel.UiState.Displaying,
+        onSplashScreenComplete = DoNothing,
+        onNavigated = {},
+    )
 }

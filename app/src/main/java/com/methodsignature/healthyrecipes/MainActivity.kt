@@ -21,7 +21,10 @@ class MainActivity : ComponentActivity() {
             HealthyRecipesTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     OnboardingFlow(
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
+                        onOnboardingComplete = {
+                            TODO("Navigate out of onboarding flow.")
+                        }
                     )
                 }
             }
