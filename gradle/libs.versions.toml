@@ -11,7 +11,8 @@ kotlinCoroutines = "1.8.1"
 lifecycleRuntimeKtx = "2.8.0"
 lifecycleViewModel = "2.8.0"
 mockkVersion = "1.13.11"
-squareMoshiKotlin = "1.15.1"
+moshi = "1.15.1"
+turbine = "1.1.0"
 
 
 [libraries]
@@ -34,7 +35,8 @@ kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.re
 kotlin-coroutine-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockkVersion" }
 mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockkVersion" }
-square-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "squareMoshiKotlin" }
+square-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+cash-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 
 
 [plugins]

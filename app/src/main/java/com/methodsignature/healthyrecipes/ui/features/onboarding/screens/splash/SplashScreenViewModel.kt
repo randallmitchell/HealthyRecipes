@@ -18,7 +18,6 @@ class SplashScreenViewModel @Inject constructor() : ViewModel() {
 
     sealed class NavigationEvent {
         data object SplashComplete : NavigationEvent()
-        data object Navigated : NavigationEvent()
     }
 
     sealed class UiState {

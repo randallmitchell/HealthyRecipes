@@ -5,8 +5,8 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
-import org.amshove.kluent.`should be equal to`
-import org.junit.Test
+import org.amshove.kluent.shouldBeEqualTo
+import kotlin.test.Test
 
 class GetRecipesUseCaseTest {
 
@@ -35,13 +35,13 @@ class GetRecipesUseCaseTest {
     fun `GIVEN recipe service is empty THEN returns an empty list`() = runTest {
         coEvery { recipeService.getRecipes() } returns listOf()
         val results = tested.run()
-        results.size `should be equal to` 0
+        results.size shouldBeEqualTo 0
     }
 
     @Test
     fun `GIVEN recipes are available THEN they are returned`() = runTest {
         coEvery { recipeService.getRecipes() } returns TestData.recipes
         val results = tested.run()
-        results.size `should be equal to` 1
+        results.size shouldBeEqualTo 1
     }
 }
