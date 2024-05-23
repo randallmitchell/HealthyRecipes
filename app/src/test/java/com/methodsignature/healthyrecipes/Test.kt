@@ -6,6 +6,7 @@ import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.setMain
+import org.junit.Rule
 import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
@@ -23,4 +24,12 @@ class MainDispatcherRule(
         super.finished(description)
         Dispatchers.resetMain()
     }
+}
+
+open class BaseTest {
+
+    @get:Rule
+    val mainDispatcherRule = MainDispatcherRule()
+
+
 }
