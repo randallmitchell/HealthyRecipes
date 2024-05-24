@@ -1,12 +1,15 @@
 package com.methodsignature.healthyrecipes.ui.features.onboarding
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.methodsignature.healthyrecipes.language.DoNothing
+import com.methodsignature.healthyrecipes.ui.features.onboarding.OnboardingFlowViewModel.NavigationEvent
 import com.methodsignature.healthyrecipes.ui.features.onboarding.screens.SplashScreen
 
 @Composable
@@ -18,9 +21,21 @@ fun OnboardingFlow(
     val navController = rememberNavController()
     val startDestination = Route.SplashScreen
 
+    val navigationEvent = viewModel.navigationEvent.collectAsState()
+    when (navigationEvent.value) {
+        NavigationEvent.Navigated -> DoNothing
+        NavigationEvent.Initialized -> DoNothing
+        NavigationEvent.OnboardingComplete -> {
+            onOnboardingComplete()
+        }
+    }
+
     OnboardingFlowContent(
+        modifier = modifier,
         navController = navController,
-        onOnboardingComplete = onOnboardingComplete,
+        onSplashComplete = {
+            viewModel.onSplashComplete()
+        },
         startDestination = startDestination,
     )
 }
@@ -29,14 +44,14 @@ fun OnboardingFlow(
 fun OnboardingFlowContent(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    onOnboardingComplete: () -> Unit,
+    onSplashComplete: () -> Unit,
     startDestination: Route,
 ) {
     NavHost(navController = navController, startDestination = startDestination.path) {
         composable(startDestination.path) {
             SplashScreen(
                 modifier = modifier,
-                onSplashScreenComplete = onOnboardingComplete,
+                onSplashScreenComplete = onSplashComplete,
             )
         }
     }

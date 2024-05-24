@@ -15,7 +15,8 @@ class OnboardingFlowViewModel @Inject constructor() : ViewModel() {
         data object Navigated : NavigationEvent()
     }
 
-    private val _navigationEvent: MutableStateFlow<NavigationEvent> = MutableStateFlow(NavigationEvent.Initialized)
+    private val _navigationEvent: MutableStateFlow<NavigationEvent> =
+        MutableStateFlow(NavigationEvent.Initialized)
     val navigationEvent: StateFlow<NavigationEvent> = _navigationEvent
 
     fun onSplashComplete() {
