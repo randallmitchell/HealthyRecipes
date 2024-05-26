@@ -1,4 +1,4 @@
-package com.methodsignature.healthyrecipes.ui.features.onboarding
+package com.methodsignature.healthyrecipes.ui.flows.onboarding
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -9,8 +9,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.methodsignature.healthyrecipes.language.DoNothing
-import com.methodsignature.healthyrecipes.ui.features.onboarding.OnboardingFlowViewModel.NavigationEvent
-import com.methodsignature.healthyrecipes.ui.features.onboarding.screens.SplashScreen
+import com.methodsignature.healthyrecipes.ui.flows.onboarding.OnboardingFlowViewModel.NavigationEvent
+import com.methodsignature.healthyrecipes.ui.flows.onboarding.screens.SplashScreen
 
 @Composable
 fun OnboardingFlow(

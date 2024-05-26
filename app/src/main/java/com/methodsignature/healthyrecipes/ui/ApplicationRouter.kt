@@ -12,8 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.methodsignature.healthyrecipes.language.DoNothing
-import com.methodsignature.healthyrecipes.ui.features.content.ContentFlow
-import com.methodsignature.healthyrecipes.ui.features.onboarding.OnboardingFlow
+import com.methodsignature.healthyrecipes.ui.flows.content.ContentFlow
+import com.methodsignature.healthyrecipes.ui.flows.onboarding.OnboardingFlow
 import com.methodsignature.healthyrecipes.ui.theme.HealthyRecipesTheme
 
 @Composable

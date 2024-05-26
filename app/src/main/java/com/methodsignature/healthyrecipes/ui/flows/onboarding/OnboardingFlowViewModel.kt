@@ -1,4 +1,4 @@
-package com.methodsignature.healthyrecipes.ui.features.onboarding
+package com.methodsignature.healthyrecipes.ui.flows.onboarding
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

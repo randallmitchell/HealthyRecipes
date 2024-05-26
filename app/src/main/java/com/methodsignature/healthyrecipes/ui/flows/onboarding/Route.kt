@@ -1,4 +1,4 @@
-package com.methodsignature.healthyrecipes.ui.features.onboarding
+package com.methodsignature.healthyrecipes.ui.flows.onboarding
 
 sealed class Route {
     abstract val path: String

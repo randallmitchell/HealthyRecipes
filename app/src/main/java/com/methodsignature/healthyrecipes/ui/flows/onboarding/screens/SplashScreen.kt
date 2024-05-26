@@ -1,4 +1,4 @@
-package com.methodsignature.healthyrecipes.ui.features.onboarding.screens
+package com.methodsignature.healthyrecipes.ui.flows.onboarding.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,7 +18,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.methodsignature.healthyrecipes.language.DoNothing
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
-import com.methodsignature.healthyrecipes.ui.features.onboarding.screens.splash.SplashScreenViewModel
+import com.methodsignature.healthyrecipes.ui.flows.onboarding.screens.splash.SplashScreenViewModel
 import com.methodsignature.healthyrecipes.ui.theme.Colors
 
 @Composable

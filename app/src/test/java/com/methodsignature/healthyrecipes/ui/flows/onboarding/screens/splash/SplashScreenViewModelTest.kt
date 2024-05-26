@@ -1,13 +1,12 @@
-package com.methodsignature.healthyrecipes.ui.features.onboarding.screens.splash
+package com.methodsignature.healthyrecipes.ui.flows.onboarding.screens.splash
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.ui.features.onboarding.screens.splash.SplashScreenViewModel.NavigationEvent
-import com.methodsignature.healthyrecipes.ui.features.onboarding.screens.splash.SplashScreenViewModel.UiState
+import com.methodsignature.healthyrecipes.ui.flows.onboarding.screens.splash.SplashScreenViewModel.NavigationEvent
+import com.methodsignature.healthyrecipes.ui.flows.onboarding.screens.splash.SplashScreenViewModel.UiState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
-import kotlin.math.exp
 import kotlin.test.Test
 
 class SplashScreenViewModelTest : BaseTest() {

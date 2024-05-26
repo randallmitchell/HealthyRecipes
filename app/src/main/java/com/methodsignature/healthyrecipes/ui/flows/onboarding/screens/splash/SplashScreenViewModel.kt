@@ -1,4 +1,4 @@
-package com.methodsignature.healthyrecipes.ui.features.onboarding.screens.splash
+package com.methodsignature.healthyrecipes.ui.flows.onboarding.screens.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
