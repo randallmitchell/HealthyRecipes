@@ -32,7 +32,7 @@ fun ApplicationRouter(
         ApplicationRouterViewModel.NavigationEvent.Initialized -> DoNothing
     }
 
-    HealthyRecipesRouterContent(
+    ApplicationRouterContent(
         navController = navController,
         startDestination = Route.OnboardingFlow,
         onOnboardingComplete = onOnboardingComplete,
@@ -40,7 +40,7 @@ fun ApplicationRouter(
 }
 
 @Composable
-fun HealthyRecipesRouterContent(
+fun ApplicationRouterContent(
     navController: NavHostController,
     startDestination: Route,
     onOnboardingComplete: () -> Unit,
