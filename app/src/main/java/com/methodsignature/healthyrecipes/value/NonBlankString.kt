@@ -24,5 +24,5 @@ class NonBlankStringMoshiAdapter {
     fun toJson(nonBlankString: NonBlankString): String = nonBlankString.value
 
     @FromJson
-    fun fromJson(string: String): NonBlankString = NonBlankString.from("string")!!
+    fun fromJson(string: String): NonBlankString = NonBlankString.from(string)!!
 }

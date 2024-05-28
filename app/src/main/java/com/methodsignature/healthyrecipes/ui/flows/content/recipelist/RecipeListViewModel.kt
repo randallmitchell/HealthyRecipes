@@ -44,12 +44,12 @@ class RecipeListViewModel @Inject constructor(
                 id = it.id,
                 heading = it.description,
                 body = it.run {
-                    val ingredientsAsTwoLines = it.ingredients.take(2).foldIndexed(
+                    val ingredientsAsList = it.ingredients.foldIndexed(
                         initial = ""
                     ) { index, acc, item ->
-                        acc.plus(if (index > 0) "\n" else "").plus(item.name.value)
+                        acc.plus(if (index > 0) ", " else "").plus(item.name.value)
                     }
-                    NonBlankString.from(ingredientsAsTwoLines)
+                    NonBlankString.from(ingredientsAsList)
                 }
             )
         }
