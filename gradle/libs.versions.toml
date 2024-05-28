@@ -2,7 +2,7 @@
 activityCompose = "1.9.0"
 androidxHiltNavigationCompose = "1.0.0"
 agp = "8.4.0"
-composeBom = "2023.08.00"
+composeBom = "2024.05.00"
 coreKtx = "1.13.1"
 googleDaggerHilt = "2.51.1"
 junit = "4.13.2"
