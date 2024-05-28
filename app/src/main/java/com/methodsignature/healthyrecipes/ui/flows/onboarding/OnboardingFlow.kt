@@ -3,7 +3,7 @@ package com.methodsignature.healthyrecipes.ui.flows.onboarding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,7 +16,7 @@ import com.methodsignature.healthyrecipes.ui.flows.onboarding.screens.SplashScre
 fun OnboardingFlow(
     modifier: Modifier = Modifier,
     onOnboardingComplete: () -> Unit,
-    viewModel: OnboardingFlowViewModel = viewModel(),
+    viewModel: OnboardingFlowViewModel = hiltViewModel(),
 ) {
     val navController = rememberNavController()
     val startDestination = Route.SplashScreen

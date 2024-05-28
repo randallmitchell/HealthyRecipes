@@ -5,7 +5,7 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import javax.inject.Inject
 
 
-class GetRecipesUseCase @Inject constructor(
+class GetRecipeListUseCase @Inject constructor(
     private val recipeService: RecipeService,
 ) {
     data class Recipe(
@@ -21,7 +21,8 @@ class GetRecipesUseCase @Inject constructor(
         val unitType: NonBlankString,
         val name: NonBlankString,
     )
-    suspend fun run() : List<Recipe> {
+
+    suspend fun run(): List<Recipe> {
         return recipeService.getRecipes().toRecipeList()
     }
 

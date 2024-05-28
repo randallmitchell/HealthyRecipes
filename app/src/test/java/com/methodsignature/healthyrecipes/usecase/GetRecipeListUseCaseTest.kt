@@ -8,10 +8,10 @@ import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
 import kotlin.test.Test
 
-class GetRecipesUseCaseTest {
+class GetRecipeListUseCaseTest {
 
     private val recipeService = mockk<RecipeService>()
-    private val tested = GetRecipesUseCase(recipeService)
+    private val tested = GetRecipeListUseCase(recipeService)
 
     private object TestData {
         val ingredient = RecipeService.Ingredient(

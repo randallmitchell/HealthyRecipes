@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.methodsignature.healthyrecipes.language.DoNothing
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
@@ -24,7 +24,7 @@ import com.methodsignature.healthyrecipes.ui.theme.Colors
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
-    viewModel: SplashScreenViewModel = viewModel(),
+    viewModel: SplashScreenViewModel = hiltViewModel(),
     onSplashScreenComplete: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsState()

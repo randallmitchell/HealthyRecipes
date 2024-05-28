@@ -6,7 +6,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -18,7 +18,7 @@ import com.methodsignature.healthyrecipes.ui.theme.HealthyRecipesTheme
 
 @Composable
 fun ApplicationRouter(
-    viewModel: ApplicationRouterViewModel = viewModel(),
+    viewModel: ApplicationRouterViewModel = hiltViewModel(),
 ) {
     val navController = rememberNavController()
     val onOnboardingComplete = { viewModel.onOnboardingComplete() }
