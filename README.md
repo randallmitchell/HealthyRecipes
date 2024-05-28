@@ -14,7 +14,7 @@ using this format
       "ingredients": [
         {
           "units": "1.5",
-          "unit-type": "tablespoon",
+          "unitType": "tablespoon",
           "name":  "olive oil"
         }
       ],

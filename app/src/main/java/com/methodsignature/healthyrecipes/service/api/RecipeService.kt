@@ -9,13 +9,13 @@ interface RecipeService {
         val description: NonBlankString,
         val servings: String? = null,
         val instructions: String? = null,
-        val ingredients: List<Ingredient>
+        val ingredients: List<Ingredient>,
     )
 
     data class Ingredient(
         val units: NonBlankString,
         val unitType: NonBlankString,
-        val name: NonBlankString
+        val name: NonBlankString,
     )
 
     suspend fun getRecipes(): List<Recipe>
