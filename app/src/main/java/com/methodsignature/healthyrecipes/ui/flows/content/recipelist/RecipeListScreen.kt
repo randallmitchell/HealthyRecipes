@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.methodsignature.healthyrecipes.ui.components.Body
 import com.methodsignature.healthyrecipes.ui.components.CircularProgressIndicator
-import com.methodsignature.healthyrecipes.ui.components.Heading2
+import com.methodsignature.healthyrecipes.ui.components.Heading1
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
 import com.methodsignature.healthyrecipes.ui.theme.Colors
@@ -57,18 +57,18 @@ fun RecipeListContent(
 
             is RecipeListViewModel.UiState.RecipeList -> {
                 LazyColumn(
-                    contentPadding = PaddingValues(vertical = 12.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp),
-                    modifier = Modifier.background(color = Colors.Corriander)
+                    contentPadding = PaddingValues(vertical = 1.dp),
+                    verticalArrangement = Arrangement.spacedBy(1.dp),
+                    modifier = Modifier.background(color = Colors.Steel)
                 ) {
                     items(uiState.recipeList) { recipe ->
                         Column(
                             modifier = Modifier
                                 .fillParentMaxWidth()
-                                .background(color = Colors.Naan)
+                                .background(color = Colors.Basmati)
                                 .padding(all = 12.dp),
                         ) {
-                            Heading2(text = recipe.heading.value)
+                            Heading1(text = recipe.heading.value)
                             recipe.body?.let {
                                 Body(
                                     text = it.value,
