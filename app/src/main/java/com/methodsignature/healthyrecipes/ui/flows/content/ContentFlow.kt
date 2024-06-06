@@ -10,5 +10,8 @@ import com.methodsignature.healthyrecipes.ui.flows.content.recipelist.RecipeList
 fun ContentFlow(
     modifier: Modifier = Modifier,
 ) {
-    RecipeListScreen(modifier = modifier)
+    RecipeListScreen(
+        modifier = modifier,
+        onRecipeSelected = { TODO("Implement recipe detail navigation") }
+    )
 }

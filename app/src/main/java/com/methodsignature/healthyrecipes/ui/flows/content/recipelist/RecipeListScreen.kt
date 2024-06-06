@@ -1,6 +1,7 @@
 package com.methodsignature.healthyrecipes.ui.flows.content.recipelist
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,17 +23,20 @@ import com.methodsignature.healthyrecipes.ui.components.Heading1
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
 import com.methodsignature.healthyrecipes.ui.theme.Colors
+import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
 
 @Composable
 fun RecipeListScreen(
     modifier: Modifier = Modifier,
     recipeListViewModel: RecipeListViewModel = hiltViewModel(),
+    onRecipeSelected: (EntityId) -> Unit,
 ) {
     val uiState = recipeListViewModel.uiState.collectAsState()
     RecipeListContent(
         uiState = uiState.value,
         modifier = modifier,
+        onRecipeSelected = onRecipeSelected
     )
 }
 
@@ -40,6 +44,7 @@ fun RecipeListScreen(
 fun RecipeListContent(
     uiState: RecipeListViewModel.UiState,
     modifier: Modifier,
+    onRecipeSelected: (EntityId) -> Unit,
 ) {
     Screen(
         background = { Background(color = Colors.Naan) }
@@ -62,18 +67,20 @@ fun RecipeListContent(
                     modifier = Modifier.background(color = Colors.Steel)
                 ) {
                     items(uiState.recipeList) { recipe ->
-                        Column(
-                            modifier = Modifier
-                                .fillParentMaxWidth()
-                                .background(color = Colors.Basmati)
-                                .padding(all = 12.dp),
-                        ) {
-                            Heading1(text = recipe.heading.value)
-                            recipe.body?.let {
-                                Body(
-                                    text = it.value,
-                                    maxLines = 2,
-                                )
+                        Box(modifier = Modifier.clickable { onRecipeSelected(recipe.id) }) {
+                            Column(
+                                modifier = Modifier
+                                    .fillParentMaxWidth()
+                                    .background(color = Colors.Basmati)
+                                    .padding(all = 12.dp),
+                            ) {
+                                Heading1(text = recipe.heading.value)
+                                recipe.body?.let {
+                                    Body(
+                                        text = it.value,
+                                        maxLines = 2,
+                                    )
+                                }
                             }
                         }
                     }
@@ -107,5 +114,6 @@ fun RecipeListContentPreview() {
             )
         ),
         modifier = Modifier,
+        onRecipeSelected = {},
     )
 }

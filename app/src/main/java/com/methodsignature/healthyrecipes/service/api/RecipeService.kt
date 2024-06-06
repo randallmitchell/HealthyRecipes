@@ -1,11 +1,12 @@
 package com.methodsignature.healthyrecipes.service.api
 
+import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
 
 interface RecipeService {
 
     data class Recipe(
-        val id: NonBlankString,
+        val id: EntityId,
         val description: NonBlankString,
         val servings: String? = null,
         val instructions: String? = null,

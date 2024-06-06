@@ -3,6 +3,7 @@ package com.methodsignature.healthyrecipes.ui.flows.content.recipelist
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.methodsignature.healthyrecipes.usecase.GetRecipeListUseCase
+import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +24,7 @@ class RecipeListViewModel @Inject constructor(
     }
 
     data class Recipe(
-        val id: NonBlankString,
+        val id: EntityId,
         val heading: NonBlankString,
         val body: NonBlankString?,
     )
