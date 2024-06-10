@@ -1,8 +1,7 @@
-package com.methodsignature.healthyrecipes.ui.flows.content.recipelist
+package com.methodsignature.healthyrecipes.ui.flows.content.recipe.list
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.ui.flows.content.recipe.list.RecipeListViewModel
 import com.methodsignature.healthyrecipes.ui.flows.content.recipe.list.RecipeListViewModel.UiState
 import com.methodsignature.healthyrecipes.usecase.GetRecipeListUseCase
 import com.methodsignature.healthyrecipes.value.NonBlankString
@@ -14,7 +13,6 @@ import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test
 
 class RecipeListViewModelTest : BaseTest() {
-
 
     private object TestData {
         val ingredient = GetRecipeListUseCase.Ingredient(
@@ -37,8 +35,8 @@ class RecipeListViewModelTest : BaseTest() {
         val recipe = GetRecipeListUseCase.Recipe(
             id = NonBlankString.from("1")!!,
             description = NonBlankString.from("description")!!,
-            servings = "",
-            instructions = "",
+            servings = null,
+            instructions = null,
             ingredients = ingredients
         )
         val recipes = listOf(recipe)
@@ -57,7 +55,7 @@ class RecipeListViewModelTest : BaseTest() {
         tested.uiState.test {
             val item = awaitItem()
 
-            item shouldBeInstanceOf UiState.RecipeList::class.java
+            item shouldBeInstanceOf UiState.RecipeList::class
 
             val recipes = (item as UiState.RecipeList).recipeList
             recipes.size shouldBeEqualTo 1

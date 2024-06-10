@@ -19,6 +19,7 @@ import com.methodsignature.healthyrecipes.ui.theme.HealthyRecipesTheme
 @Composable
 fun ApplicationRouter(
     viewModel: ApplicationRouterViewModel = hiltViewModel(),
+    onContentFlowComplete: () -> Unit,
 ) {
     val navController = rememberNavController()
     val onOnboardingComplete = { viewModel.onOnboardingComplete() }
@@ -36,6 +37,7 @@ fun ApplicationRouter(
         navController = navController,
         startDestination = Route.OnboardingFlow,
         onOnboardingComplete = onOnboardingComplete,
+        onContentFlowComplete = onContentFlowComplete,
     )
 }
 
@@ -44,6 +46,7 @@ fun ApplicationRouterContent(
     navController: NavHostController,
     startDestination: Route,
     onOnboardingComplete: () -> Unit,
+    onContentFlowComplete: () -> Unit,
 ) {
     HealthyRecipesTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
@@ -61,7 +64,10 @@ fun ApplicationRouterContent(
                 }
                 composable(Route.ContentFlow.path) {
                     ContentFlow(
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
+                        onFlowComplete = {
+                            onContentFlowComplete()
+                        }
                     )
                 }
             }

@@ -24,8 +24,8 @@ class GetRecipeListUseCaseTest {
         val recipe = RecipeService.Recipe(
             id = NonBlankString.from("1")!!,
             description = NonBlankString.from("description")!!,
-            servings = "",
-            instructions = "",
+            servings = null,
+            instructions = null,
             ingredients = ingredients
         )
         val recipes = listOf(recipe)

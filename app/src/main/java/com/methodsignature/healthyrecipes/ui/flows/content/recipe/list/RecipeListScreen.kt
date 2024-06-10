@@ -6,19 +6,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.methodsignature.healthyrecipes.ui.components.Body
-import com.methodsignature.healthyrecipes.ui.components.CircularProgressIndicator
+import com.methodsignature.healthyrecipes.ui.components.CenterInSpaceProgressIndicator
 import com.methodsignature.healthyrecipes.ui.components.Heading1
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
@@ -29,14 +27,14 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 @Composable
 fun RecipeListScreen(
     modifier: Modifier = Modifier,
-    recipeListViewModel: RecipeListViewModel = hiltViewModel(),
+    viewModel: RecipeListViewModel = hiltViewModel(),
     onRecipeSelected: (EntityId) -> Unit,
+    onCloseRecipeListRequested: () -> Unit,
 ) {
-    val uiState = recipeListViewModel.uiState.collectAsState()
+    // TODO implement close recipe list
+    val uiState = viewModel.uiState.collectAsState()
     RecipeListContent(
-        uiState = uiState.value,
-        modifier = modifier,
-        onRecipeSelected = onRecipeSelected
+        uiState = uiState.value, modifier = modifier, onRecipeSelected = onRecipeSelected
     )
 }
 
@@ -46,25 +44,17 @@ fun RecipeListContent(
     modifier: Modifier,
     onRecipeSelected: (EntityId) -> Unit,
 ) {
-    Screen(
-        background = { Background(color = Colors.Naan) }
-    ) {
+    Screen(background = { Background(color = Colors.Naan) }) {
         when (uiState) {
-            RecipeListViewModel.UiState.Loading -> {
-                Box(
-                    modifier = modifier
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
+            RecipeListViewModel.UiState.Loading -> CenterInSpaceProgressIndicator(
+                modifier = modifier,
+            )
 
             is RecipeListViewModel.UiState.RecipeList -> {
                 LazyColumn(
                     contentPadding = PaddingValues(vertical = 1.dp),
                     verticalArrangement = Arrangement.spacedBy(1.dp),
-                    modifier = Modifier.background(color = Colors.Steel)
+                    modifier = modifier.background(color = Colors.Steel),
                 ) {
                     items(uiState.recipeList) { recipe ->
                         Box(modifier = Modifier.clickable { onRecipeSelected(recipe.id) }) {

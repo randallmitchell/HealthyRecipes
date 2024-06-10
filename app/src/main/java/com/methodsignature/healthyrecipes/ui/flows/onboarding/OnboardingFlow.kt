@@ -23,8 +23,8 @@ fun OnboardingFlow(
 
     val navigationEvent = viewModel.navigationEvent.collectAsState()
     when (navigationEvent.value) {
-        NavigationEvent.Navigated -> DoNothing
         NavigationEvent.Initialized -> DoNothing
+        NavigationEvent.Navigated -> DoNothing
         NavigationEvent.OnboardingComplete -> {
             onOnboardingComplete()
         }
@@ -47,8 +47,8 @@ fun OnboardingFlowContent(
     onSplashComplete: () -> Unit,
     startDestination: Route,
 ) {
-    NavHost(navController = navController, startDestination = startDestination.path) {
-        composable(startDestination.path) {
+    NavHost(navController = navController, startDestination = startDestination.path.value) {
+        composable(Route.SplashScreen.path.value) {
             SplashScreen(
                 modifier = modifier,
                 onSplashScreenComplete = onSplashComplete,
