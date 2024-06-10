@@ -1,4 +1,4 @@
-package com.methodsignature.healthyrecipes.ui.flows.content.recipelist
+package com.methodsignature.healthyrecipes.ui.flows.content.recipe.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

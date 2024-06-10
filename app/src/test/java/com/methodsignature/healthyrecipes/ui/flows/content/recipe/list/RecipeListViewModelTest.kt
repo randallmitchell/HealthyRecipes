@@ -2,7 +2,8 @@ package com.methodsignature.healthyrecipes.ui.flows.content.recipelist
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.ui.flows.content.recipelist.RecipeListViewModel.UiState
+import com.methodsignature.healthyrecipes.ui.flows.content.recipe.list.RecipeListViewModel
+import com.methodsignature.healthyrecipes.ui.flows.content.recipe.list.RecipeListViewModel.UiState
 import com.methodsignature.healthyrecipes.usecase.GetRecipeListUseCase
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
