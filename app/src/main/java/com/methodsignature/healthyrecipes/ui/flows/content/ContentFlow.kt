@@ -29,7 +29,7 @@ fun ContentFlow(
         ContentFlowViewModel.NavigationEvent.Initialized -> DoNothing
         ContentFlowViewModel.NavigationEvent.Navigated -> DoNothing
         ContentFlowViewModel.NavigationEvent.CloseRecipe -> {
-            onFlowComplete()
+            navController.popBackStack()
         }
 
         is ContentFlowViewModel.NavigationEvent.ViewRecipe -> {

@@ -10,9 +10,11 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.test.runTest
+import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test
+import kotlin.math.exp
 
 class RecipeDetailViewModelTest : BaseTest() {
 
@@ -70,6 +72,30 @@ class RecipeDetailViewModelTest : BaseTest() {
                 NonBlankString.from("1 tablespoon love")!!,
                 NonBlankString.from("1 piece determination")!!,
             )
+        }
+    }
+
+    @Test
+    fun onBackPress_requestClose()  = runTest {
+        // GIVEN back press is emitted
+        val recipe = TestData.recipe
+        val useCase = mockk<GetRecipeDetailUseCase>()
+        coEvery { useCase.run(recipe.id) } returns recipe
+        val tested = RecipeDetailViewModel(
+            savedStateHandle = SavedStateHandle(
+                mapOf(Route.RecipeDetail.RECIPE_ID_KEY to recipe.id.value)
+            ),
+            getRecipeDetailUseCase = useCase,
+        )
+
+        // WHEN back press is fired
+        tested.onBackPress()
+
+        // THEN request close
+        val expected = UiState.RequestingClose
+        tested.uiState.test {
+            val actual = awaitItem()
+            actual shouldBe expected
         }
     }
 }

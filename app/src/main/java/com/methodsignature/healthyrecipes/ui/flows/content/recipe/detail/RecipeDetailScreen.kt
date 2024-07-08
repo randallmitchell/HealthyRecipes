@@ -1,5 +1,6 @@
 package com.methodsignature.healthyrecipes.ui.flows.content.recipe.detail
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,8 @@ fun RecipeDetailScreen(
     RecipeDetailContent(
         modifier = modifier,
         uiState = uiState.value,
+        onBackPress = { viewModel.onBackPress() },
+        onClose = onRecipeCloseRequested
     )
 }
 
@@ -39,13 +42,20 @@ fun RecipeDetailScreen(
 fun RecipeDetailContent(
     modifier: Modifier,
     uiState: UiState,
+    onBackPress: () -> Unit,
+    onClose: () -> Unit,
 ) {
+    BackHandler {
+        onBackPress()
+    }
+
     Screen(
         background = { Background(color = Colors.Naan) }
     ) {
         Box(modifier = modifier.padding(12.dp)) {
             when (uiState) {
                 UiState.Loading -> CenterInSpaceProgressIndicator()
+                UiState.RequestingClose -> onClose()
                 is UiState.RecipeDetail -> {
                     Column(
                         verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -87,5 +97,7 @@ fun RecipeDetailContentPreview() {
                 NonBlankString.from("1 tablespoon olive oil")!!,
             )
         ),
+        onBackPress = {},
+        onClose = {},
     )
 }

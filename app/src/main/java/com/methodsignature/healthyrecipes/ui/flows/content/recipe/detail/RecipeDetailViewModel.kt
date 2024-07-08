@@ -28,6 +28,8 @@ class RecipeDetailViewModel @Inject constructor(
             val instructions: NonBlankString? = null,
             val ingredients: List<NonBlankString>,
         ) : UiState()
+
+        data object RequestingClose : UiState()
     }
 
     private val recipeId: EntityId =
@@ -53,5 +55,9 @@ class RecipeDetailViewModel @Inject constructor(
                 NonBlankString.from("${ingredient.units.value} ${ingredient.unitType.value} ${ingredient.name.value}")!!
             }
         )
+    }
+
+    fun onBackPress() {
+        _uiState.value = UiState.RequestingClose
     }
 }
