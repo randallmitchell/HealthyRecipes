@@ -8,8 +8,8 @@ interface RecipeService {
     data class Recipe(
         val id: EntityId,
         val description: NonBlankString,
-        val servings: String? = null,
-        val instructions: String? = null,
+        val servings: NonBlankString? = null,
+        val instructions: NonBlankString? = null,
         val ingredients: List<Ingredient>,
     )
 
@@ -20,4 +20,6 @@ interface RecipeService {
     )
 
     suspend fun getRecipes(): List<Recipe>
+
+    suspend fun getRecipe(id: EntityId): Recipe
 }

@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -42,6 +44,40 @@ fun Heading1(
         modifier = modifier,
         color = color,
         fontSize = 28.sp,
+    )
+}
+
+@Composable
+fun Heading2(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = Colors.Steel,
+) {
+    Text(
+        text = text,
+        modifier = modifier,
+        color = color,
+        fontSize = 20.sp,
+        fontWeight = FontWeight.Bold,
+    )
+}
+
+@Composable
+fun Emphasis(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = Colors.Steel,
+    maxLines: Int = 1,
+    overflow: TextOverflow = TextOverflow.Ellipsis,
+) {
+    Text(
+        text = text,
+        modifier = modifier,
+        color = color,
+        fontSize = 10.sp,
+        fontStyle = FontStyle.Italic,
+        maxLines = maxLines,
+        overflow = overflow,
     )
 }
 
@@ -77,6 +113,7 @@ fun TextPreview() {
     ) {
         Title(text = "Title")
         Heading1(text = "Heading 1")
+        Heading2(text = "Heading 2")
         Body(text = "Body | This is some short body text.")
         Body(text = "Body | This is some significantly longer text that is meant to be the body of some type of page or screen or list item.")
     }
