@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.google.dagger.hilt.android)
+    alias(libs.plugins.realm.kotlin)
 }
 
 android {
@@ -63,9 +64,11 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.square.moshi.kotlin)
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.android.compiler)
+    implementation(libs.realm.base)
+    implementation(libs.realm.sync)
+    implementation(libs.square.moshi.kotlin)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
@@ -74,7 +77,7 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.kluent)
     testImplementation(libs.kotlin.test)
-    testImplementation(libs.kotlin.coroutine.test)
+    testImplementation(libs.kotlin.coroutines.test)
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
 }
