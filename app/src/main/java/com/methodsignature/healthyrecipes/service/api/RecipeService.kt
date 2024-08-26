@@ -22,4 +22,6 @@ interface RecipeService {
     suspend fun getRecipes(): List<Recipe>
 
     suspend fun getRecipe(id: EntityId): Recipe
+
+    suspend fun saveRecipe(recipe: Recipe)
 }

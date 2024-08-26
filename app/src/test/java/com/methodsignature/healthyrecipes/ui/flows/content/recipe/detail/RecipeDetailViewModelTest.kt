@@ -14,7 +14,6 @@ import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test
-import kotlin.math.exp
 
 class RecipeDetailViewModelTest : BaseTest() {
 
