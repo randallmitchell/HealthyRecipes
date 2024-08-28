@@ -8,14 +8,13 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmObject
+import io.realm.kotlin.types.RealmUUID
 import io.realm.kotlin.types.annotations.PrimaryKey
-import org.mongodb.kbson.BsonObjectId
-import org.mongodb.kbson.ObjectId
 
 class RealmRecipe : RealmObject {
 
     @PrimaryKey
-    var _id: ObjectId = BsonObjectId()
+    var _id: RealmUUID = RealmUUID.random()
 
     var description: String = ""
     var servings: String = ""

@@ -11,6 +11,8 @@ fun HealthyRecipesApplication(
     viewModel: HealthyRecipesApplicationViewModel = hiltViewModel(),
     onApplicationComplete: () -> Unit
 ) {
+    viewModel.onApplicationLaunch()
+
     ApplicationRouter(
         onContentFlowComplete = {
             onApplicationComplete()

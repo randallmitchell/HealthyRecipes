@@ -1,5 +1,6 @@
 package com.methodsignature.healthyrecipes.ui.flows.content.recipe.list
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.methodsignature.healthyrecipes.usecase.GetRecipeListUseCase
@@ -8,6 +9,8 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,8 +37,11 @@ class RecipeListViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            val recipeList = recipesUseCase.run().toViewModel()
-            _uiState.value = UiState.RecipeList(recipeList)
+            recipesUseCase.observe().map {
+                it.toViewModel()
+            }.collect { recipes ->
+                _uiState.value = UiState.RecipeList(recipes)
+            }
         }
     }
 

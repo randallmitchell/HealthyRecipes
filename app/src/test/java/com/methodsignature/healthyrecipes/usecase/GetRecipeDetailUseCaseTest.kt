@@ -36,7 +36,7 @@ class GetRecipeDetailUseCaseTest : BaseTest() {
     @Test
     fun onEntityNotFound_raise() = runTest {
         // GIVEN the recipe service returns entity not found exception
-        coEvery { recipeService.getRecipe(any()) } throws EntityNotFoundException("Entity not found.")
+        coEvery { recipeService.observeRecipe(any()) } throws EntityNotFoundException("Entity not found.")
 
         // THEN raise that exception
         try {
@@ -49,7 +49,7 @@ class GetRecipeDetailUseCaseTest : BaseTest() {
     @Test
     fun onRecipe_returnRecipe() = runTest {
         // GIVEN a recipe is returned
-        coEvery { recipeService.getRecipe(TestData.recipe.id) } returns TestData.recipe
+        coEvery { recipeService.observeRecipe(TestData.recipe.id) } returns TestData.recipe
 
         // THEN map and return that recipe
         val result = tested.run(TestData.recipe.id)

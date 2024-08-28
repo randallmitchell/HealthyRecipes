@@ -46,7 +46,7 @@ class RecipeListViewModelTest : BaseTest() {
     fun onRecipeListReceived_showRecipeList() = runTest {
         // GIVEN the recipe list is returned
         val useCase = mockk<GetRecipeListUseCase>()
-        coEvery { useCase.run() } returns (TestData.recipes)
+        coEvery { useCase.observe() } returns (TestData.recipes)
         val tested = RecipeListViewModel(
             recipesUseCase = useCase,
         )
@@ -66,7 +66,7 @@ class RecipeListViewModelTest : BaseTest() {
     fun onRecipeListReceived_concatenatesIngredients() = runTest {
         // GIVEN the recipe list is returned
         val useCase = mockk<GetRecipeListUseCase>()
-        coEvery { useCase.run() } returns (TestData.recipes)
+        coEvery { useCase.observe() } returns (TestData.recipes)
         val tested = RecipeListViewModel(
             recipesUseCase = useCase,
         )

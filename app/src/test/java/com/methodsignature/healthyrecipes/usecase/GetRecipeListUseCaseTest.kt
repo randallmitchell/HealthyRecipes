@@ -33,15 +33,15 @@ class GetRecipeListUseCaseTest {
 
     @Test
     fun `GIVEN recipe service is empty THEN returns an empty list`() = runTest {
-        coEvery { recipeService.getRecipes() } returns listOf()
-        val results = tested.run()
+        coEvery { recipeService.observeAllRecipes() } returns listOf()
+        val results = tested.observe()
         results.size shouldBeEqualTo 0
     }
 
     @Test
     fun `GIVEN recipes are available THEN they are returned`() = runTest {
-        coEvery { recipeService.getRecipes() } returns TestData.recipes
-        val results = tested.run()
+        coEvery { recipeService.observeAllRecipes() } returns TestData.recipes
+        val results = tested.observe()
         results.size shouldBeEqualTo 1
     }
 }
