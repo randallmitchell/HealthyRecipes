@@ -5,7 +5,7 @@ import com.methodsignature.healthyrecipes.service.api.HardCodedSeedDataService
 import com.methodsignature.healthyrecipes.service.api.RecipeService
 import javax.inject.Inject
 
-class TryToPrefillRecipesUseCase @Inject constructor(
+class SeedRecipeListUseCase @Inject constructor(
     private val recipeService: RecipeService,
     private val configurationService: ConfigurationService,
     private val hardCodedSeedDataService: HardCodedSeedDataService,
