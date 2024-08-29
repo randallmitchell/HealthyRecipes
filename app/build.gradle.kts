@@ -74,7 +74,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation(libs.cash.turbine)
+    testImplementation(libs.cash.turbine)
     testImplementation(libs.junit)
     testImplementation(libs.kluent)
     testImplementation(libs.kotlin.test)

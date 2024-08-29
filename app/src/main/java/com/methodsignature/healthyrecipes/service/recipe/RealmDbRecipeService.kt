@@ -33,7 +33,6 @@ class RealmDbRecipeService @Inject constructor(
                 ?: throw EntityNotFoundException(
                     "Recipe with ID `${id.value}` not found."
                 )
-
         }
     }
 
