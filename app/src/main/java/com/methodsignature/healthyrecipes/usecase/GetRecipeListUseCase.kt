@@ -3,8 +3,9 @@ package com.methodsignature.healthyrecipes.usecase
 import com.methodsignature.healthyrecipes.service.api.RecipeService
 import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-
 
 class GetRecipeListUseCase @Inject constructor(
     private val recipeService: RecipeService,
@@ -23,8 +24,10 @@ class GetRecipeListUseCase @Inject constructor(
         val name: NonBlankString,
     )
 
-    suspend fun run(): List<Recipe> {
-        return recipeService.getRecipes().toRecipeList()
+    suspend fun observe(): Flow<List<Recipe>> {
+        return recipeService.observeAllRecipes().map {
+            it.toRecipeList()
+        }
     }
 
     private fun List<RecipeService.Recipe>.toRecipeList(): List<Recipe> {

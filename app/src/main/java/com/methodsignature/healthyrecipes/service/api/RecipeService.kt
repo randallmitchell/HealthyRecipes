@@ -2,6 +2,7 @@ package com.methodsignature.healthyrecipes.service.api
 
 import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
+import kotlinx.coroutines.flow.Flow
 
 interface RecipeService {
 
@@ -19,7 +20,25 @@ interface RecipeService {
         val name: NonBlankString,
     )
 
-    suspend fun getRecipes(): List<Recipe>
+    /**
+     * Fetches all locally saved recipes.
+     */
+    suspend fun observeAllRecipes(): Flow<List<Recipe>>
 
-    suspend fun getRecipe(id: EntityId): Recipe
+    /**
+     * Fetches a locally saved recipe.
+     *
+     * @return null if recipe is not available.
+     */
+    suspend fun observeRecipe(id: EntityId): Flow<Recipe>
+
+    /**
+     * Saves a recipe locally.
+     */
+    suspend fun saveRecipe(recipe: Recipe)
+
+    /**
+     * Saves a list of recipes locally.
+     */
+    suspend fun saveRecipes(withRecipes: List<Recipe>)
 }

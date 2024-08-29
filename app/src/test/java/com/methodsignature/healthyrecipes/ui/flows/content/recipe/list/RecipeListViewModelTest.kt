@@ -7,6 +7,7 @@ import com.methodsignature.healthyrecipes.usecase.GetRecipeListUseCase
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
@@ -46,7 +47,7 @@ class RecipeListViewModelTest : BaseTest() {
     fun onRecipeListReceived_showRecipeList() = runTest {
         // GIVEN the recipe list is returned
         val useCase = mockk<GetRecipeListUseCase>()
-        coEvery { useCase.run() } returns (TestData.recipes)
+        coEvery { useCase.observe() } returns flow { emit(TestData.recipes) }
         val tested = RecipeListViewModel(
             recipesUseCase = useCase,
         )
@@ -66,7 +67,7 @@ class RecipeListViewModelTest : BaseTest() {
     fun onRecipeListReceived_concatenatesIngredients() = runTest {
         // GIVEN the recipe list is returned
         val useCase = mockk<GetRecipeListUseCase>()
-        coEvery { useCase.run() } returns (TestData.recipes)
+        coEvery { useCase.observe() } returns flow { emit(TestData.recipes) }
         val tested = RecipeListViewModel(
             recipesUseCase = useCase,
         )

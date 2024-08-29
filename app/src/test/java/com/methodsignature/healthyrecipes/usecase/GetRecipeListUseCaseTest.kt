@@ -1,14 +1,19 @@
 package com.methodsignature.healthyrecipes.usecase
 
+import app.cash.turbine.test
+import com.methodsignature.healthyrecipes.BaseTest
 import com.methodsignature.healthyrecipes.service.api.RecipeService
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
+import io.mockk.coJustAwait
+import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
 import kotlin.test.Test
 
-class GetRecipeListUseCaseTest {
+class GetRecipeListUseCaseTest : BaseTest() {
 
     private val recipeService = mockk<RecipeService>()
     private val tested = GetRecipeListUseCase(recipeService)
@@ -33,15 +38,20 @@ class GetRecipeListUseCaseTest {
 
     @Test
     fun `GIVEN recipe service is empty THEN returns an empty list`() = runTest {
-        coEvery { recipeService.getRecipes() } returns listOf()
-        val results = tested.run()
-        results.size shouldBeEqualTo 0
+        coEvery { recipeService.observeAllRecipes() } returns flow { emit(listOf()) }
+        tested.observe().test {
+            awaitItem() shouldBeEqualTo listOf()
+            awaitComplete()
+        }
+
     }
 
     @Test
     fun `GIVEN recipes are available THEN they are returned`() = runTest {
-        coEvery { recipeService.getRecipes() } returns TestData.recipes
-        val results = tested.run()
-        results.size shouldBeEqualTo 1
+        coEvery { recipeService.observeAllRecipes() } returns flow { emit(TestData.recipes) }
+        tested.observe().test {
+            awaitItem().size shouldBeEqualTo 1
+            awaitComplete()
+        }
     }
 }

@@ -9,12 +9,12 @@ import com.methodsignature.healthyrecipes.usecase.GetRecipeDetailUseCase
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test
-import kotlin.math.exp
 
 class RecipeDetailViewModelTest : BaseTest() {
 
@@ -50,7 +50,7 @@ class RecipeDetailViewModelTest : BaseTest() {
         // GIVEN a recipe is returned
         val expected = TestData.recipe
         val useCase = mockk<GetRecipeDetailUseCase>()
-        coEvery { useCase.run(expected.id) } returns expected
+        coEvery { useCase.observe(expected.id) } returns flow { emit(expected) }
         val tested = RecipeDetailViewModel(
             savedStateHandle = SavedStateHandle(
                 mapOf(Route.RecipeDetail.RECIPE_ID_KEY to expected.id.value)
@@ -80,7 +80,7 @@ class RecipeDetailViewModelTest : BaseTest() {
         // GIVEN back press is emitted
         val recipe = TestData.recipe
         val useCase = mockk<GetRecipeDetailUseCase>()
-        coEvery { useCase.run(recipe.id) } returns recipe
+        coEvery { useCase.observe(recipe.id) } returns flow { emit(recipe) }
         val tested = RecipeDetailViewModel(
             savedStateHandle = SavedStateHandle(
                 mapOf(Route.RecipeDetail.RECIPE_ID_KEY to recipe.id.value)
