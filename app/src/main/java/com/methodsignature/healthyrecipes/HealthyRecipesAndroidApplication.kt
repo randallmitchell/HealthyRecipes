@@ -14,7 +14,7 @@ class HealthyRecipesAndroidApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         } else {
-            TODO("Plant crash reporting tree")
+            TODO("Plant observability tree")
         }
     }
 }
