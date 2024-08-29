@@ -15,8 +15,9 @@ lifecycleViewModel = "2.8.0"
 mockkVersion = "1.13.11"
 moshi = "1.15.1"
 navigationVersion = "2.7.7"
-turbine = "1.1.0"
 realmKotlin = "1.16.0"
+timber = "5.0.1"
+turbine = "1.1.0"
 
 
 [libraries]
@@ -34,6 +35,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+cash-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "googleDaggerHilt" }
 google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "googleDaggerHilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -42,11 +44,10 @@ kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.re
 kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockkVersion" }
 mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockkVersion" }
-square-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
-cash-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 realm-base = { group = "io.realm.kotlin", name = "library-base", version.ref = "realmKotlin" }
 realm-sync = { group = "io.realm.kotlin", name = "library-sync", version.ref = "realmKotlin" }
-
+square-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber"}
 
 
 [plugins]

@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.realm.base)
     implementation(libs.realm.sync)
     implementation(libs.square.moshi.kotlin)
+    implementation(libs.timber)
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
