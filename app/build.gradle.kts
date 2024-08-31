@@ -1,8 +1,11 @@
+apply(from = "../gradle/remote_services_configs.gradle.kts")
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
     alias(libs.plugins.google.dagger.hilt.android)
+    alias(libs.plugins.newrelic)
     alias(libs.plugins.realm.kotlin)
 }
 
@@ -30,8 +33,17 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("boolean", "ENABLE_DEBUG_LOGGING", "false")
+            buildConfigField("boolean", "ENABLE_OBSERVABILITY_LOGGING", "true")
+            buildConfigField("String", "NEW_RELIC_API_KEY", rootProject.extra.get("NEW_RELIC_API_KEY").toString())
+        }
+        debug {
+            buildConfigField("boolean", "ENABLE_DEBUG_LOGGING", "true")
+            buildConfigField("boolean", "ENABLE_OBSERVABILITY_LOGGING", "true")
+            buildConfigField("String", "NEW_RELIC_API_KEY", rootProject.extra.get("NEW_RELIC_API_KEY").toString())
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -41,6 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -67,6 +80,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.android.compiler)
+    implementation(libs.newrelic)
     implementation(libs.realm.base)
     implementation(libs.realm.sync)
     implementation(libs.square.moshi.kotlin)

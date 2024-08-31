@@ -15,6 +15,7 @@ lifecycleViewModel = "2.8.0"
 mockkVersion = "1.13.11"
 moshi = "1.15.1"
 navigationVersion = "2.7.7"
+newrelic = "7.5.1"
 realmKotlin = "1.16.0"
 timber = "5.0.1"
 turbine = "1.1.0"
@@ -44,6 +45,7 @@ kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.re
 kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockkVersion" }
 mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockkVersion" }
+newrelic = { group = "com.newrelic.agent.android", name = "android-agent", version.ref = "newrelic" }
 realm-base = { group = "io.realm.kotlin", name = "library-base", version.ref = "realmKotlin" }
 realm-sync = { group = "io.realm.kotlin", name = "library-sync", version.ref = "realmKotlin" }
 square-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
@@ -52,6 +54,8 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "googleDaggerHilt" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+newrelic = { id = "com.newrelic.agent.android", version.ref = "newrelic" }
 realm-kotlin = { id = "io.realm.kotlin", version.ref = "realmKotlin" }
+

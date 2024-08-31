@@ -2,7 +2,6 @@ package com.methodsignature.healthyrecipes
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-import org.mongodb.kbson.BuildConfig
 import timber.log.Timber
 
 @HiltAndroidApp
@@ -11,10 +10,13 @@ class HealthyRecipesAndroidApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        if (BuildConfig.DEBUG) {
+        // ensure logging reliability by bypassing app architecture concerns for log initialization
+        if (BuildConfig.ENABLE_DEBUG_LOGGING) {
             Timber.plant(Timber.DebugTree())
-        } else {
-            TODO("Plant observability tree")
         }
+        // TODO implement New Relic log tree
+        // if (BuildConfig.ENABLE_OBSERVABILITY_LOGGING) {
+        //     Timber.plant(ObservabilityLoggingTree)
+        // }
     }
 }
