@@ -23,14 +23,11 @@ class NewRelicObservabilityLogTree() : Timber.Tree() {
     // This builder just helps ensure proper initialization before log is planted.
     // It is also assumed here that this is the first call to the New Relic SDK.
     class Builder(private val applicationContext: Context) {
-
-        lateinit var logTree: NewRelicObservabilityLogTree
-
         fun build(): NewRelicObservabilityLogTree {
             NewRelic.withApplicationToken(BuildConfig.NEW_RELIC_API_KEY).apply {
                 start(applicationContext)
             }
-            return logTree
+            return NewRelicObservabilityLogTree()
         }
     }
 }
