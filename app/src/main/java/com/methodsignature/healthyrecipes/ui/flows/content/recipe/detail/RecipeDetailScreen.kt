@@ -7,17 +7,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.methodsignature.healthyrecipes.R
 import com.methodsignature.healthyrecipes.ui.components.Body
 import com.methodsignature.healthyrecipes.ui.components.CenterInSpaceProgressIndicator
 import com.methodsignature.healthyrecipes.ui.components.Emphasis
 import com.methodsignature.healthyrecipes.ui.components.Heading1
 import com.methodsignature.healthyrecipes.ui.components.Heading2
+import com.methodsignature.healthyrecipes.ui.components.dialog.MessageBar
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
+import com.methodsignature.healthyrecipes.ui.flows.content.recipe.detail.RecipeDetailViewModel.MessageBarState
 import com.methodsignature.healthyrecipes.ui.flows.content.recipe.detail.RecipeDetailViewModel.UiState
 import com.methodsignature.healthyrecipes.ui.theme.Colors
 import com.methodsignature.healthyrecipes.value.EntityId
@@ -29,12 +34,17 @@ fun RecipeDetailScreen(
     viewModel: RecipeDetailViewModel = hiltViewModel(),
     onRecipeCloseRequested: () -> Unit,
 ) {
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
+
+    val errorState by viewModel.messageBarState.collectAsState()
+
     RecipeDetailContent(
         modifier = modifier,
-        uiState = uiState.value,
+        uiState = uiState,
         onBackPress = { viewModel.onBackPress() },
-        onClose = onRecipeCloseRequested
+        onClose = onRecipeCloseRequested,
+        messageBarState = errorState,
+        onDismissMessageBar = { viewModel.onDismissMessageBar() },
     )
 }
 
@@ -42,15 +52,17 @@ fun RecipeDetailScreen(
 fun RecipeDetailContent(
     modifier: Modifier,
     uiState: UiState,
+    messageBarState: MessageBarState,
     onBackPress: () -> Unit,
     onClose: () -> Unit,
+    onDismissMessageBar: () -> Unit,
 ) {
     BackHandler {
         onBackPress()
     }
 
     Screen(
-        background = { Background(color = Colors.Naan) }
+        background = { Background(color = Colors.Naan) },
     ) {
         Box(modifier = modifier.padding(12.dp)) {
             when (uiState) {
@@ -73,6 +85,14 @@ fun RecipeDetailContent(
                 }
             }
         }
+        MessageBar.DismissableSlideUpMessageBar(
+            message = stringResource(id = R.string.generic_screen_error_message),
+            isVisible = when (messageBarState) {
+                MessageBarState.GenericError -> true
+                MessageBarState.None -> false
+            },
+            onDismiss = onDismissMessageBar,
+        )
     }
 }
 
@@ -98,6 +118,8 @@ fun RecipeDetailContentPreview() {
             )
         ),
         onBackPress = {},
+        messageBarState = MessageBarState.GenericError,
         onClose = {},
+        onDismissMessageBar = {},
     )
 }

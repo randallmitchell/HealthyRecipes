@@ -3,6 +3,7 @@ package com.methodsignature.healthyrecipes.ui.flows.content.recipe.detail
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
+import com.methodsignature.healthyrecipes.service.errors.EntityNotFoundException
 import com.methodsignature.healthyrecipes.ui.flows.content.Route
 import com.methodsignature.healthyrecipes.ui.flows.content.recipe.detail.RecipeDetailViewModel.UiState
 import com.methodsignature.healthyrecipes.usecase.GetRecipeDetailUseCase
@@ -46,7 +47,7 @@ class RecipeDetailViewModelTest : BaseTest() {
     }
 
     @Test
-    fun onRecipeReceived_showRecipe() = runTest {
+    fun `GIVEN recipe detail received THEN show recipe`() = runTest {
         // GIVEN a recipe is returned
         val expected = TestData.recipe
         val useCase = mockk<GetRecipeDetailUseCase>()
@@ -76,7 +77,7 @@ class RecipeDetailViewModelTest : BaseTest() {
     }
 
     @Test
-    fun onBackPress_requestClose()  = runTest {
+    fun `GIVEN back is pressed THEN request the screen be closed`()  = runTest {
         // GIVEN back press is emitted
         val recipe = TestData.recipe
         val useCase = mockk<GetRecipeDetailUseCase>()
@@ -94,6 +95,48 @@ class RecipeDetailViewModelTest : BaseTest() {
         // THEN request close
         val expected = UiState.RequestingClose
         tested.uiState.test {
+            val actual = awaitItem()
+            actual shouldBe expected
+        }
+    }
+
+    @Test
+    fun `GIVEN an error occurs when fetching recipe THEN a generic error message is shown`() = runTest {
+        val recipe = TestData.recipe
+        val useCase = mockk<GetRecipeDetailUseCase>()
+        coEvery { useCase.observe(recipe.id) } returns flow {
+            throw EntityNotFoundException("")
+        }
+        val tested = RecipeDetailViewModel(
+            savedStateHandle = SavedStateHandle(
+                mapOf(Route.RecipeDetail.RECIPE_ID_KEY to recipe.id.value)
+            ),
+            getRecipeDetailUseCase = useCase
+        )
+
+        val expected = RecipeDetailViewModel.MessageBarState.GenericError
+        tested.messageBarState.test {
+            val actual = awaitItem()
+            actual shouldBe expected
+        }
+    }
+
+    @Test
+    fun `GIVEN the message bar dismiss is selected THEN the message bar is dismissed`() = runTest {
+        val recipe = TestData.recipe
+        val useCase = mockk<GetRecipeDetailUseCase>()
+        coEvery { useCase.observe(recipe.id) } returns flow { emit(recipe) }
+        val tested = RecipeDetailViewModel(
+            savedStateHandle = SavedStateHandle(
+                mapOf(Route.RecipeDetail.RECIPE_ID_KEY to recipe.id.value)
+            ),
+            getRecipeDetailUseCase = useCase
+        )
+
+        tested.onDismissMessageBar()
+
+        val expected = RecipeDetailViewModel.MessageBarState.None
+        tested.messageBarState.test {
             val actual = awaitItem()
             actual shouldBe expected
         }

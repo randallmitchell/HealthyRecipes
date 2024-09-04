@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -86,17 +87,37 @@ fun Emphasis(
 fun Body(
     text: String,
     modifier: Modifier = Modifier,
+    textAlign: TextAlign = TextAlign.Start,
     color: Color = Colors.Steel,
     maxLines: Int = Int.MAX_VALUE,
     overflow: TextOverflow = TextOverflow.Ellipsis,
 ) {
     Text(
         text = text,
+        textAlign = textAlign,
         modifier = modifier,
         color = color,
         fontSize = 12.sp,
         maxLines = maxLines,
         overflow = overflow,
+    )
+}
+
+@Composable
+fun Link(
+    text: String,
+    modifier: Modifier = Modifier,
+    color: Color = Colors.Lotus,
+    maxLines: Int = 1,
+    overflow: TextOverflow = TextOverflow.Ellipsis,
+) {
+    Text(
+        text = text,
+        color = color,
+        fontSize = 12.sp,
+        maxLines = maxLines,
+        overflow = overflow,
+        modifier = modifier,
     )
 }
 
@@ -116,5 +137,6 @@ fun TextPreview() {
         Heading2(text = "Heading 2")
         Body(text = "Body | This is some short body text.")
         Body(text = "Body | This is some significantly longer text that is meant to be the body of some type of page or screen or list item.")
+        Link(text = "Link")
     }
 }
