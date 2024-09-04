@@ -1,7 +1,13 @@
 package com.methodsignature.healthyrecipes
 
 import android.app.Application
+import com.methodsignature.healthyrecipes.observability.stability.NewRelicObservabilityLogTree
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.runInterruptible
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 @HiltAndroidApp
@@ -10,13 +16,20 @@ class HealthyRecipesAndroidApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // ensure logging reliability by bypassing app architecture concerns for log initialization
-        if (BuildConfig.ENABLE_DEBUG_LOGGING) {
-            Timber.plant(Timber.DebugTree())
+        runBlocking {
+            withContext(Dispatchers.IO) {
+                // ensure logging reliability by bypassing app architecture concerns for log initialization
+                if (BuildConfig.ENABLE_DEBUG_LOGGING) {
+                    Timber.plant(Timber.DebugTree())
+                }
+                if (BuildConfig.ENABLE_OBSERVABILITY_LOGGING) {
+                    Timber.plant(
+                        NewRelicObservabilityLogTree.Builder(
+                            this@HealthyRecipesAndroidApplication
+                        ).build()
+                    )
+                }
+            }
         }
-        // TODO implement New Relic log tree
-        // if (BuildConfig.ENABLE_OBSERVABILITY_LOGGING) {
-        //     Timber.plant(ObservabilityLoggingTree)
-        // }
     }
 }
