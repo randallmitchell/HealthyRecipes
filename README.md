@@ -1,7 +1,7 @@
-This code is under construction and doesn't fully reflect my thoughts on design and architecture. When done it should be a solid general purpose application codebase that can be modified to work for most small to medium size business domains that have use for an Android application. Really, the architecture should go pretty far and similar enough codebases to this (once done) have been proven in the wild for years under a very small sample set. Things have been reevaluated and adjusted over time - generally with good results.
+This code is under construction and doesn't fully reflect my thoughts on design and architecture. When done it should be a solid general purpose application codebase that can be modified to work for most small to medium size business domains that have use for an Android application. The architecture is generic and focuses on predictability, maliability, and extensability. Really, the architecture should go pretty far (once done) and is largely proven in the wild under a very small sample set. Things have been reevaluated and adjusted over time - generally with good results.
 
 # Things that need more immediate attention
-- the UI/UX is missing some essential experience mechanics (e.g. a title bar). this will take a while to get to.
+- the UI/UX is missing essential experience mechanics (e.g. a title bar). this will take a while to get to.
 - the packages structure needs it's first pass on organization.
   - the higher level packages should be converted into build modules in order to protect the various parts of the code from eachother.
   - the root dependency is the UseCase package so it should not depend on other modules. this is where the business rules live and where _the important_ testing goes.
@@ -12,7 +12,9 @@ This code is under construction and doesn't fully reflect my thoughts on design 
 - usecases tests validate business rules
 - viewmodel tests validates UI rules
 - services and views should not make decisions or interpret information
-- services transmit data using their own DTO that interprets into app usecase API modeling. 
+- services transmit data using their own DTO that interprets into app usecase API modeling.
+- the navigation system uses a mechanic called "flows" that implement a user experience concept.
+  - _i've found them more agreeable than some other more generic [and subsequently more disjointed] navigation schemes I've worked with in the past. Aligning with the product conceptually is quite often a boon._
 
 # Big ticket functional tech items for the near future
 - ~~error handling~~
@@ -54,4 +56,4 @@ NEW_RELIC_API_KEY="{value}"
 ```
 
 # Coming Soon
-APIs [celebrate hands]
+APIs
