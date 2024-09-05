@@ -19,6 +19,7 @@ This code is under construction and doesn't fully reflect my thoughts on design 
 
 # Big ticket functional tech items for the near future
 - ~~error handling~~
+- api support
 - analaytics service
 - see [issues](https://github.com/randallmitchell/HealthyRecipes/issues) for more
 - i'm planning on building out the wiki in this GitHub project with architecture and design documentation along with some related educational direction.
