@@ -28,8 +28,8 @@ object MessageBar {
 
     @Composable
     fun DismissableSlideUpMessageBar(
-        isVisible: Boolean,
         message: String,
+        isVisible: Boolean,
         modifier: Modifier = Modifier,
         linkText: String = stringResource(id = R.string.message_bar_dismissable_link_default_text),
         onDismiss: () -> Unit,

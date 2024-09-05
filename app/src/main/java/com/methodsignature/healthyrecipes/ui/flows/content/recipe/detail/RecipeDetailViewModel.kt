@@ -20,11 +20,6 @@ class RecipeDetailViewModel @Inject constructor(
     getRecipeDetailUseCase: GetRecipeDetailUseCase,
 ) : ViewModel() {
 
-    sealed class MessageBarState {
-        data object GenericError : MessageBarState()
-        data object None : MessageBarState()
-    }
-
     sealed class UiState {
         data object Loading : UiState()
         data class RecipeDetail(
@@ -36,6 +31,11 @@ class RecipeDetailViewModel @Inject constructor(
         ) : UiState()
 
         data object RequestingClose : UiState()
+    }
+
+    sealed class MessageBarState {
+        data object GenericError : MessageBarState()
+        data object None : MessageBarState()
     }
 
     private val recipeId: EntityId =

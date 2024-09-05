@@ -44,7 +44,7 @@ fun RecipeDetailScreen(
         onBackPress = { viewModel.onBackPress() },
         onClose = onRecipeCloseRequested,
         messageBarState = errorState,
-        onDismissMessageBar = { viewModel.onDismissMessageBar() },
+        onDismissMessageBarRequested = { viewModel.onDismissMessageBar() },
     )
 }
 
@@ -55,7 +55,7 @@ fun RecipeDetailContent(
     messageBarState: MessageBarState,
     onBackPress: () -> Unit,
     onClose: () -> Unit,
-    onDismissMessageBar: () -> Unit,
+    onDismissMessageBarRequested: () -> Unit,
 ) {
     BackHandler {
         onBackPress()
@@ -91,7 +91,7 @@ fun RecipeDetailContent(
                 MessageBarState.GenericError -> true
                 MessageBarState.None -> false
             },
-            onDismiss = onDismissMessageBar,
+            onDismiss = onDismissMessageBarRequested,
         )
     }
 }
@@ -120,6 +120,6 @@ fun RecipeDetailContentPreview() {
         onBackPress = {},
         messageBarState = MessageBarState.GenericError,
         onClose = {},
-        onDismissMessageBar = {},
+        onDismissMessageBarRequested = {},
     )
 }
