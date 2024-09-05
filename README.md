@@ -14,7 +14,7 @@ This code is under construction and doesn't fully reflect my thoughts on design 
 - services and views should not make decisions or interpret information
 - services transmit data using their own DTO that interprets into app usecase API modeling.
 - the navigation system uses a mechanic called "flows" that implement a user experience concept.
-  - _i've found them more agreeable than some other more generic [and subsequently more disjointed] navigation schemes I've worked with in the past. Aligning with the product conceptually is quite often a boon._
+  - _i've found them more agreeable than some other more generic [and subsequently more disjointed] navigation schemes I've worked with in the past. Aligning with product conceptually is quite often a boon._
 
 # Big ticket functional tech items for the near future
 - ~~error handling~~
