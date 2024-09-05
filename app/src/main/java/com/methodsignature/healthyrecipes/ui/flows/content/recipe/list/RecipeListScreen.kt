@@ -11,15 +11,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.methodsignature.healthyrecipes.R
 import com.methodsignature.healthyrecipes.ui.components.Body
 import com.methodsignature.healthyrecipes.ui.components.CenterInSpaceProgressIndicator
 import com.methodsignature.healthyrecipes.ui.components.Heading1
+import com.methodsignature.healthyrecipes.ui.components.dialog.MessageBar
 import com.methodsignature.healthyrecipes.ui.components.screen.Background
 import com.methodsignature.healthyrecipes.ui.components.screen.Screen
+import com.methodsignature.healthyrecipes.ui.flows.content.recipe.list.RecipeListViewModel.MessageBarState
 import com.methodsignature.healthyrecipes.ui.theme.Colors
 import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
@@ -32,17 +37,25 @@ fun RecipeListScreen(
     onCloseRecipeListRequested: () -> Unit,
 ) {
     // TODO implement close recipe list
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
+    val messageBarState by viewModel.messageBarState.collectAsState()
+
     RecipeListContent(
-        uiState = uiState.value, modifier = modifier, onRecipeSelected = onRecipeSelected
+        uiState = uiState,
+        messageBarState = messageBarState,
+        modifier = modifier,
+        onRecipeSelected = onRecipeSelected,
+        onDismissMessageBarRequested = { viewModel.onDismissMessageBar() }
     )
 }
 
 @Composable
 fun RecipeListContent(
     uiState: RecipeListViewModel.UiState,
+    messageBarState: MessageBarState,
     modifier: Modifier,
     onRecipeSelected: (EntityId) -> Unit,
+    onDismissMessageBarRequested: () -> Unit,
 ) {
     Screen(background = { Background(color = Colors.Naan) }) {
         when (uiState) {
@@ -77,6 +90,15 @@ fun RecipeListContent(
                 }
             }
         }
+
+        MessageBar.DismissableSlideUpMessageBar(
+            message = stringResource(id = R.string.generic_screen_error_message),
+            isVisible = when (messageBarState) {
+                MessageBarState.GenericError -> true
+                MessageBarState.None -> false
+            },
+            onDismiss = onDismissMessageBarRequested
+        )
     }
 }
 
@@ -103,7 +125,9 @@ fun RecipeListContentPreview() {
                 ),
             )
         ),
+        messageBarState = MessageBarState.None,
         modifier = Modifier,
         onRecipeSelected = {},
+        onDismissMessageBarRequested = {},
     )
 }

@@ -4,6 +4,7 @@ androidxHiltNavigationCompose = "1.0.0"
 androidxDatastorePreferences = "1.1.1"
 agp = "8.2.2"
 composeBom = "2024.05.00"
+composeConstraintLayout = "1.0.1"
 coreKtx = "1.13.1"
 googleDaggerHilt = "2.51.1"
 junit = "4.13.2"
@@ -15,14 +16,17 @@ lifecycleViewModel = "2.8.0"
 mockkVersion = "1.13.11"
 moshi = "1.15.1"
 navigationVersion = "2.7.7"
-turbine = "1.1.0"
+newrelic = "7.5.1"
 realmKotlin = "1.16.0"
+timber = "5.0.1"
+turbine = "1.1.0"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+androidx-compose-constraint-layout = { group = "androidx.constraintlayout", name = "constraintlayout-compose", version.ref = "composeConstraintLayout" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "androidxDatastorePreferences" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
@@ -34,6 +38,7 @@ androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+cash-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "googleDaggerHilt" }
 google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "googleDaggerHilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -42,15 +47,17 @@ kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.re
 kotlin-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinCoroutines" }
 mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockkVersion" }
 mockk-agent = { group = "io.mockk", name = "mockk-agent", version.ref = "mockkVersion" }
-square-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
-cash-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+newrelic = { group = "com.newrelic.agent.android", name = "android-agent", version.ref = "newrelic" }
 realm-base = { group = "io.realm.kotlin", name = "library-base", version.ref = "realmKotlin" }
 realm-sync = { group = "io.realm.kotlin", name = "library-sync", version.ref = "realmKotlin" }
-
+square-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber"}
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "googleDaggerHilt" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+newrelic = { id = "com.newrelic.agent.android", version.ref = "newrelic" }
 realm-kotlin = { id = "io.realm.kotlin", version.ref = "realmKotlin" }
+

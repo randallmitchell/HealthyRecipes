@@ -43,7 +43,7 @@ class RealmRecipe : RealmObject {
                 description = NonBlankString.from(description)
                     ?: throw MalformedDataException("invalid `description`: `$description`"),
                 servings = NonBlankString.from(servings),
-                instructions = NonBlankString.from(description),
+                instructions = NonBlankString.from(instructions),
                 ingredients = ingredients.map {
                     it.toIngredient()
                 }

@@ -1,8 +1,8 @@
 package com.methodsignature.healthyrecipes.ui.flows.content.recipe.list
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.methodsignature.healthyrecipes.language.coroutines.catchWithLogging
 import com.methodsignature.healthyrecipes.usecase.GetRecipeListUseCase
 import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
@@ -10,7 +10,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,16 +31,29 @@ class RecipeListViewModel @Inject constructor(
         val body: NonBlankString?,
     )
 
+    sealed class MessageBarState {
+        data object GenericError : MessageBarState()
+        data object None : MessageBarState()
+    }
+
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState> = _uiState
 
+    private val _messageBarState: MutableStateFlow<MessageBarState> =
+        MutableStateFlow(MessageBarState.None)
+    val messageBarState: StateFlow<MessageBarState> = _messageBarState
+
     init {
         viewModelScope.launch {
-            recipesUseCase.observe().map {
-                it.toViewModel()
-            }.collect { recipes ->
-                _uiState.value = UiState.RecipeList(recipes)
-            }
+            recipesUseCase.observe()
+                .catchWithLogging("Error fetching recipe list.") {
+                    _messageBarState.value = MessageBarState.GenericError
+                }
+                .map {
+                    it.toViewModel()
+                }.collect { recipes ->
+                    _uiState.value = UiState.RecipeList(recipes)
+                }
         }
     }
 
@@ -60,5 +72,9 @@ class RecipeListViewModel @Inject constructor(
                 }
             )
         }
+    }
+
+    fun onDismissMessageBar() {
+        _messageBarState.value = MessageBarState.None
     }
 }

@@ -3,6 +3,7 @@ package com.methodsignature.healthyrecipes.ui.flows.content.recipe.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.methodsignature.healthyrecipes.language.coroutines.catchWithLogging
 import com.methodsignature.healthyrecipes.ui.flows.content.Route
 import com.methodsignature.healthyrecipes.usecase.GetRecipeDetailUseCase
 import com.methodsignature.healthyrecipes.value.EntityId
@@ -10,7 +11,6 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,19 +33,28 @@ class RecipeDetailViewModel @Inject constructor(
         data object RequestingClose : UiState()
     }
 
+    sealed class MessageBarState {
+        data object GenericError : MessageBarState()
+        data object None : MessageBarState()
+    }
+
     private val recipeId: EntityId =
         checkNotNull(EntityId.from(savedStateHandle.get<String>(Route.RecipeDetail.RECIPE_ID_KEY)))
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState.Loading)
     val uiState: StateFlow<UiState> = _uiState
 
+    private val _messageBarState: MutableStateFlow<MessageBarState> = MutableStateFlow(MessageBarState.None)
+    val messageBarState: StateFlow<MessageBarState> = _messageBarState
+
     init {
         viewModelScope.launch {
-             getRecipeDetailUseCase.observe(recipeId).map { recipe ->
-                 recipe.toViewModel()
-            }.collect {
-                 _uiState.value = it
-             }
+            getRecipeDetailUseCase.observe(recipeId)
+                .catchWithLogging("Error fetching recipe $recipeId") {
+                    _messageBarState.value = MessageBarState.GenericError
+                }.collect { recipe ->
+                    _uiState.value = recipe.toViewModel()
+                }
         }
     }
 
@@ -57,11 +66,15 @@ class RecipeDetailViewModel @Inject constructor(
             instructions = this.instructions,
             ingredients = this.ingredients.map { ingredient ->
                 NonBlankString.from("${ingredient.units.value} ${ingredient.unitType.value} ${ingredient.name.value}")!!
-            }
+            },
         )
     }
 
     fun onBackPress() {
         _uiState.value = UiState.RequestingClose
+    }
+
+    fun onDismissMessageBar() {
+        _messageBarState.value = MessageBarState.None
     }
 }

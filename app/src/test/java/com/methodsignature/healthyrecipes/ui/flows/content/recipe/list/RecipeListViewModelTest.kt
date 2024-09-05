@@ -2,6 +2,7 @@ package com.methodsignature.healthyrecipes.ui.flows.content.recipe.list
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
+import com.methodsignature.healthyrecipes.ui.flows.content.recipe.list.RecipeListViewModel.MessageBarState
 import com.methodsignature.healthyrecipes.ui.flows.content.recipe.list.RecipeListViewModel.UiState
 import com.methodsignature.healthyrecipes.usecase.GetRecipeListUseCase
 import com.methodsignature.healthyrecipes.value.NonBlankString
@@ -9,6 +10,7 @@ import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
+import org.amshove.kluent.shouldBe
 import org.amshove.kluent.shouldBeEqualTo
 import org.amshove.kluent.shouldBeInstanceOf
 import org.junit.Test
@@ -44,7 +46,7 @@ class RecipeListViewModelTest : BaseTest() {
     }
 
     @Test
-    fun onRecipeListReceived_showRecipeList() = runTest {
+    fun `GIVEN the recipe list is received THEN it is shown`() = runTest {
         // GIVEN the recipe list is returned
         val useCase = mockk<GetRecipeListUseCase>()
         coEvery { useCase.observe() } returns flow { emit(TestData.recipes) }
@@ -64,20 +66,51 @@ class RecipeListViewModelTest : BaseTest() {
     }
 
     @Test
-    fun onRecipeListReceived_concatenatesIngredients() = runTest {
-        // GIVEN the recipe list is returned
+    fun `GIVEN the recipes have ingredients THEN the ingredients are concatenated`() = runTest {
         val useCase = mockk<GetRecipeListUseCase>()
         coEvery { useCase.observe() } returns flow { emit(TestData.recipes) }
         val tested = RecipeListViewModel(
             recipesUseCase = useCase,
         )
 
-        // THEN the recipe ingredients are concatenated
         tested.uiState.test {
             val item = awaitItem()
             item shouldBeInstanceOf UiState.RecipeList::class.java
             val recipe = (item as UiState.RecipeList).recipeList[0]
             recipe.body?.value shouldBeEqualTo "magic, love, determination"
         }
+    }
+
+    @Test
+    fun `GIVEN the use case throws an error THEN a generic error message is shown`() = runTest {
+        val useCase = mockk<GetRecipeListUseCase>()
+        coEvery { useCase.observe() } returns flow { throw Exception("") }
+        val tested = RecipeListViewModel(
+            recipesUseCase = useCase,
+        )
+
+        val expected = MessageBarState.GenericError
+        tested.messageBarState.test {
+            val actual = awaitItem()
+            actual shouldBe expected
+        }
+    }
+
+    @Test
+    fun `GIVEN a request to dismiss the message bar THEN the message bar is dismissed`() = runTest {
+        val useCase = mockk<GetRecipeListUseCase>()
+        coEvery { useCase.observe() } returns flow { throw Exception("") }
+        val tested = RecipeListViewModel(
+            recipesUseCase = useCase,
+        )
+
+        tested.onDismissMessageBar()
+
+        val expected = MessageBarState.None
+        tested.messageBarState.test {
+            val actual = awaitItem()
+            actual shouldBe expected
+        }
+
     }
 }
