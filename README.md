@@ -11,6 +11,7 @@ using this format
       "id": "1",
       "description": "zesty chickpea salad",
       "servings": "1 serving | make 4",
+      "instructions": "15 min @ 350 degrees",
       "ingredients": [
         {
           "units": "1.5",
