@@ -37,10 +37,8 @@ class RecipeListViewModelTest : BaseTest() {
 
         val recipe = GetRecipeListUseCase.Recipe(
             id = NonBlankString.from("1")!!,
+            name = NonBlankString.from("name")!!,
             description = NonBlankString.from("description")!!,
-            servings = null,
-            instructions = null,
-            ingredients = ingredients
         )
         val recipes = listOf(recipe)
     }
@@ -62,22 +60,6 @@ class RecipeListViewModelTest : BaseTest() {
 
             val recipes = (item as UiState.RecipeList).recipeList
             recipes.size shouldBeEqualTo 1
-        }
-    }
-
-    @Test
-    fun `GIVEN the recipes have ingredients THEN the ingredients are concatenated`() = runTest {
-        val useCase = mockk<GetRecipeListUseCase>()
-        coEvery { useCase.observe() } returns flow { emit(TestData.recipes) }
-        val tested = RecipeListViewModel(
-            recipesUseCase = useCase,
-        )
-
-        tested.uiState.test {
-            val item = awaitItem()
-            item shouldBeInstanceOf UiState.RecipeList::class.java
-            val recipe = (item as UiState.RecipeList).recipeList[0]
-            recipe.body?.value shouldBeEqualTo "magic, love, determination"
         }
     }
 

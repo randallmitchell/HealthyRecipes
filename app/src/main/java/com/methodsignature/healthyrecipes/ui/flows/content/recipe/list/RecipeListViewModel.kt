@@ -61,15 +61,8 @@ class RecipeListViewModel @Inject constructor(
         return this.map {
             Recipe(
                 id = it.id,
-                heading = it.description,
-                body = it.run {
-                    val ingredientsAsList = it.ingredients.foldIndexed(
-                        initial = ""
-                    ) { index, acc, item ->
-                        acc.plus(if (index > 0) ", " else "").plus(item.name.value)
-                    }
-                    NonBlankString.from(ingredientsAsList)
-                }
+                heading = it.name,
+                body = it.description,
             )
         }
     }

@@ -1,8 +1,8 @@
 package com.methodsignature.healthyrecipes.seed_data
 
 import android.content.Context
-import com.methodsignature.healthyrecipes.service.api.HardCodedSeedDataService
-import com.methodsignature.healthyrecipes.service.api.Recipe
+import com.methodsignature.healthyrecipes.service.api.recipe.HardCodedSeedDataService
+import com.methodsignature.healthyrecipes.service.api.recipe.model.Recipe
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi

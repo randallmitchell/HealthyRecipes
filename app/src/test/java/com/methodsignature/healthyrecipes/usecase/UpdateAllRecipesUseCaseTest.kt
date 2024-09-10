@@ -3,11 +3,11 @@ package com.methodsignature.healthyrecipes.usecase
 import com.methodsignature.healthyrecipes.BaseTest
 import com.methodsignature.healthyrecipes.service.api.ConfigurationService
 import com.methodsignature.healthyrecipes.service.api.ConfigurationService.RecipeSeedState
-import com.methodsignature.healthyrecipes.service.api.HardCodedSeedDataService
-import com.methodsignature.healthyrecipes.service.api.Ingredient
-import com.methodsignature.healthyrecipes.service.api.LocalRecipeService
-import com.methodsignature.healthyrecipes.service.api.Recipe
-import com.methodsignature.healthyrecipes.service.api.RemoteRecipeService
+import com.methodsignature.healthyrecipes.service.api.recipe.HardCodedSeedDataService
+import com.methodsignature.healthyrecipes.service.api.recipe.model.Ingredient
+import com.methodsignature.healthyrecipes.service.api.recipe.LocalRecipeService
+import com.methodsignature.healthyrecipes.service.api.recipe.model.Recipe
+import com.methodsignature.healthyrecipes.service.api.recipe.RemoteRecipeService
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -40,6 +40,7 @@ class UpdateAllRecipesUseCaseTest : BaseTest() {
 
         val recipe = Recipe(
             id = NonBlankString.from("1")!!,
+            name = NonBlankString.from("name")!!,
             description = NonBlankString.from("description")!!,
             servings = null,
             instructions = null,

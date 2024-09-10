@@ -73,9 +73,10 @@ fun RecipeDetailContent(
                         verticalArrangement = Arrangement.spacedBy(12.dp),
                         modifier = Modifier.padding(6.dp)
                     ) {
-                        Heading1(text = uiState.description.value)
+                        Heading1(text = uiState.name.value)
+                        Heading2(text = uiState.description.value)
                         uiState.servings?.let { Emphasis(text = it.value) }
-                        uiState.instructions?.let { Heading2(text = it.value) }
+                        uiState.instructions?.let { Body(text = it.value) }
                         uiState.ingredients.forEach { ingredient ->
                             Body(
                                 text = ingredient.value,
@@ -103,7 +104,8 @@ fun RecipeDetailContentPreview() {
         modifier = Modifier,
         uiState = UiState.RecipeDetail(
             id = EntityId.from("1")!!,
-            description = NonBlankString.from("chicken rotini")!!,
+            name = NonBlankString.from("Chicken Rotini")!!,
+            description = NonBlankString.from("A flavorful dish of grilled chicken and pasta inspired by italian cooking")!!,
             instructions = NonBlankString.from("15 min @ 350 degrees")!!,
             servings = NonBlankString.from("1 pan stan"),
             ingredients = listOf(

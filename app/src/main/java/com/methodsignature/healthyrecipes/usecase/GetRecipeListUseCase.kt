@@ -1,6 +1,6 @@
 package com.methodsignature.healthyrecipes.usecase
 
-import com.methodsignature.healthyrecipes.service.api.LocalRecipeService
+import com.methodsignature.healthyrecipes.service.api.recipe.LocalRecipeService
 import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import kotlinx.coroutines.flow.Flow
@@ -12,10 +12,8 @@ class GetRecipeListUseCase @Inject constructor(
 ) {
     data class Recipe(
         val id: EntityId,
+        val name: NonBlankString,
         val description: NonBlankString,
-        val servings: NonBlankString?,
-        val instructions: NonBlankString?,
-        val ingredients: List<Ingredient>,
     )
 
     data class Ingredient(
@@ -30,24 +28,12 @@ class GetRecipeListUseCase @Inject constructor(
         }
     }
 
-    private fun List<com.methodsignature.healthyrecipes.service.api.Recipe>.toRecipeList(): List<Recipe> {
+    private fun List<com.methodsignature.healthyrecipes.service.api.recipe.model.Recipe>.toRecipeList(): List<Recipe> {
         return map { dao ->
             Recipe(
                 id = dao.id,
-                description = dao.description,
-                servings = dao.servings,
-                instructions = dao.instructions,
-                ingredients = dao.ingredients.toIngredientList()
-            )
-        }
-    }
-
-    private fun List<com.methodsignature.healthyrecipes.service.api.Ingredient>.toIngredientList(): List<Ingredient> {
-        return map { dao ->
-            Ingredient(
-                units = dao.units,
-                unitType = dao.unitType,
                 name = dao.name,
+                description = dao.description,
             )
         }
     }
