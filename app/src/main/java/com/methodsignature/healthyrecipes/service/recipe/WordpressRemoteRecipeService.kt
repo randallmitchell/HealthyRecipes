@@ -5,9 +5,9 @@ import com.methodsignature.healthyrecipes.service.api.Recipe
 import com.methodsignature.healthyrecipes.service.api.RemoteRecipeService
 import com.methodsignature.healthyrecipes.service.errors.EntityNotFoundException
 import com.methodsignature.healthyrecipes.service.errors.MalformedDataException
-import com.methodsignature.healthyrecipes.service.recipe.WordpressFuelRemoteRecipeService.Acf.Companion.toRecipe
-import com.methodsignature.healthyrecipes.service.recipe.WordpressFuelRemoteRecipeService.Ingredient.Companion.toIngredient
-import com.methodsignature.healthyrecipes.service.recipe.WordpressFuelRemoteRecipeService.RecipeResponseItem.Companion.toRecipe
+import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.Acf.Companion.toRecipe
+import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.Ingredient.Companion.toIngredient
+import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.RecipeResponseItem.Companion.toRecipe
 import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import com.squareup.moshi.Json
@@ -18,7 +18,7 @@ import fuel.HttpLoader
 import javax.inject.Inject
 
 @OptIn(ExperimentalStdlibApi::class)
-class WordpressFuelRemoteRecipeService @Inject constructor(
+class WordpressRemoteRecipeService @Inject constructor(
     val fuel: HttpLoader,
     val moshi: Moshi,
     baseServiceUrl: NonBlankString,

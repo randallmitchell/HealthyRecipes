@@ -10,7 +10,7 @@ import com.methodsignature.healthyrecipes.service.api.LocalRecipeService
 import com.methodsignature.healthyrecipes.service.api.RemoteRecipeService
 import com.methodsignature.healthyrecipes.service.configuration.DataStoreConfigurationService
 import com.methodsignature.healthyrecipes.service.recipe.RealmDbLocalRecipeService
-import com.methodsignature.healthyrecipes.service.recipe.WordpressFuelRemoteRecipeService
+import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService
 import com.methodsignature.healthyrecipes.service.recipe._models.RealmIngredient
 import com.methodsignature.healthyrecipes.service.recipe._models.RealmRecipe
 import com.methodsignature.healthyrecipes.value.NonBlankString
@@ -96,7 +96,7 @@ object ServiceModule {
         fuel: HttpLoader,
         moshi: Moshi,
     ): RemoteRecipeService {
-        return WordpressFuelRemoteRecipeService(
+        return WordpressRemoteRecipeService(
             fuel = fuel,
             moshi = moshi,
             baseServiceUrl = NonBlankString.from(BuildConfig.WORDPRESS_API_BASE_URL)!!,
