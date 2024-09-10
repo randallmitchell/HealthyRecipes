@@ -1,5 +1,7 @@
 This code is under construction and doesn't fully reflect my thoughts on design and architecture. When done it should be a solid general purpose application codebase that can be modified to work for most small to medium size business domains that have use for an Android application. The architecture is generic and focuses on predictability, maliability, and extensability. Really, the architecture should go pretty far (once done) and is largely proven in the wild under a very small sample set. Things have been reevaluated and adjusted over time - generally with good results.
 
+For now the codebase is trivial with an attempt at handling a larger set of topics in a somewhat trivial nature. Essentially, the architecture is closing towards robust but is not exercised in a robust way through nuanced real world requirements.
+
 # Things that need more immediate attention
 - The UI/UX is missing essential experience mechanics (e.g. a title bar). This will take a while to get to.
 - The packages structure needs It's first pass on organization.
