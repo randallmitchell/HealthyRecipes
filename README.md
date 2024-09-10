@@ -12,7 +12,7 @@ For now the codebase is handling a larger set of topics but handling them each i
 # General concepts
 - Architecture/design is based on primary concepts that should drive decision making within the code:
   - `predictibility` : how easy is it know exactly what the impact of changes are?
-  - `mutability` : how easy is it to make changes?
+  - `mutability` : how easy is it to make changes large and small?
   - `extensibility` : how easy is it to add to as the domain grows?
   - `accessibility` : how easy is it for developers to understand?
 - Module dependency hierarchy: `view` -> `viewmodel` -> `usecase` <- `service`.
