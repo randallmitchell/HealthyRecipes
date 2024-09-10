@@ -40,6 +40,7 @@ class RecipeDetailViewModelTest : BaseTest() {
 
         val recipe = GetRecipeDetailUseCase.Recipe(
             id = NonBlankString.from("1")!!,
+            name = NonBlankString.from("name")!!,
             description = NonBlankString.from("description")!!,
             servings = NonBlankString.from("4 on the floor"),
             instructions = NonBlankString.from("instructions"),

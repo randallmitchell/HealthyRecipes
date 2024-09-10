@@ -1,10 +1,10 @@
 package com.methodsignature.healthyrecipes.service.recipe
 
-import com.methodsignature.healthyrecipes.service.api.LocalRecipeService
-import com.methodsignature.healthyrecipes.service.api.Recipe
+import com.methodsignature.healthyrecipes.service.api.recipe.LocalRecipeService
+import com.methodsignature.healthyrecipes.service.api.recipe.model.Recipe
 import com.methodsignature.healthyrecipes.service.errors.EntityNotFoundException
-import com.methodsignature.healthyrecipes.service.recipe._models.RealmRecipe
-import com.methodsignature.healthyrecipes.service.recipe._models.RealmRecipe.Companion.toRecipe
+import com.methodsignature.healthyrecipes.service.recipe.model.RealmRecipe
+import com.methodsignature.healthyrecipes.service.recipe.model.RealmRecipe.Companion.toRecipe
 import com.methodsignature.healthyrecipes.value.EntityId
 import io.realm.kotlin.Realm
 import io.realm.kotlin.UpdatePolicy

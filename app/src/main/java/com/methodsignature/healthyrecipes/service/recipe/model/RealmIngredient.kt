@@ -1,6 +1,6 @@
-package com.methodsignature.healthyrecipes.service.recipe._models
+package com.methodsignature.healthyrecipes.service.recipe.model
 
-import com.methodsignature.healthyrecipes.service.api.Ingredient
+import com.methodsignature.healthyrecipes.service.api.recipe.model.Ingredient
 import com.methodsignature.healthyrecipes.service.errors.MalformedDataException
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.realm.kotlin.types.EmbeddedRealmObject

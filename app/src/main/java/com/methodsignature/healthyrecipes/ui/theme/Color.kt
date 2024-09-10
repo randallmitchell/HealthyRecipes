@@ -32,7 +32,7 @@ object Colors {
     val Corriander = Color(0xFFAD801C)
     val Lotus = Color(0xFF894963)
     val Saffron = Color(0xFFF0C00D)
-    val Steel = Color(0x3F303237)
+    val Steel = Color(0xAC303237)
     val Tamarind = Color(0xFF000000)
 }
 

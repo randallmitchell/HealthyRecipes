@@ -24,6 +24,7 @@ class RecipeDetailViewModel @Inject constructor(
         data object Loading : UiState()
         data class RecipeDetail(
             val id: EntityId,
+            val name: NonBlankString,
             val description: NonBlankString,
             val servings: NonBlankString? = null,
             val instructions: NonBlankString? = null,
@@ -61,6 +62,7 @@ class RecipeDetailViewModel @Inject constructor(
     private fun GetRecipeDetailUseCase.Recipe.toViewModel(): UiState.RecipeDetail {
         return UiState.RecipeDetail(
             id = this.id,
+            name = this.name,
             description = this.description,
             servings = this.servings,
             instructions = this.instructions,
