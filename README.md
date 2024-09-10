@@ -22,7 +22,7 @@ For now the codebase is handling a larger set of topics but handling them each i
     - ux rules are controlled by the user experience owner. those are isolated to the `viewmodel` layer.
     - domain rules are controlled by the product owner. those are isolated and protected in the `usecase` layer.
     - individual remote services are controlled by the system architect. each remote service's mechanics are wrapped and isolated to their own `services`.
-    - local databases and other similar local functions are controlled by the application architect. amke sure those are isolated to thier own `services`.
+    - local databases and other similar local functions are controlled by the application architect. those are isolated to their own `services`.
   - Interface Segregation Principle
     - `Usecases` favor this over `viewmodels` talking directly to `repositories`.
   - Dependency Inversion
