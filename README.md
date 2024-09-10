@@ -10,6 +10,11 @@ For now the codebase is handling a larger set of topics but handling them each i
   - `Services` should not depend on other `services`. (predictibility/mutability/extensibility/accessibility)
  
 # General concepts
+- Architecture/design is based on primary concepts that should drive decision making within the code:
+  - predictibility : if you change it, how hard it is to know exactly what the impact is?
+  - mutability : how easy is it to make changes?
+  - extensibility : how easy is it to add to as the domain grows?
+  - accessibility : how easy is it for developers to understand?
 - Module dependency hierarchy: `view` -> `viewmodel` -> `usecase` <- `service`.
 - `Usecase` tests validate business rules.
 - `Viewmodel` tests validates UI/UX rules.
