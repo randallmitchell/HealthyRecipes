@@ -7,7 +7,7 @@ For now the codebase is handling a larger set of topics but handling them each i
 - The packages structure needs It's first pass on organization.
   - The higher level packages should be converted into build modules in order to protect the various parts of the code from eachother.
   - The root dependency is the `usecase` package/module so it should not depend on other modules. This is where the business rules live and where _the important_ testing goes.
-  - `Services` should not depend on other `services`. (predictibility/mutability/extensibility/accessibility)
+  - `Services` should not depend on other `services`. (predictibility/mutability/extensibility)
  
 # General concepts
 - Architecture/design is based on primary concepts that should drive decision making within the code:
@@ -16,6 +16,17 @@ For now the codebase is handling a larger set of topics but handling them each i
   - `extensibility` : how easy is it to add to as the domain grows?
   - `accessibility` : how easy is it for developers to understand?
 - Module dependency hierarchy: `view` -> `viewmodel` -> `usecase` <- `service`.
+- Arhitecture/design attempts to support some SOLID programming principles
+  - Single Responsibility : who is going to request a change?
+    - ui rules are controlled by the design owner. those are isolated to the `view` layer.
+    - ux rules are controlled by the user experience owner. those are isolated to the `viewmodel` layer.
+    - domain rules are controlled by the product owner. those are isolated and protected in the `usecase` layer.
+    - individual remote services are controlled by the system architect. each remote service's mechanics are wrapped and isolated to their own `services`.
+    - local databases and other similar local functions are controlled by the application architect. amke sure those are isolated to thier own `services`.
+  - Interface Segregation Principle
+    - `Usecases` favor this over `viewmodels` talking directly to `repositories`.
+  - Dependency Inversion
+    - The `service` layer should depend on the `usecase` layer so as to protect the `usecase`'s enclosed business rules. In that way the `usecase` layer should define all `service` interfaces.
 - `Usecase` tests validate business rules.
 - `Viewmodel` tests validates UI/UX rules.
 - `Services` and `views` should not make decisions or interpret information.
