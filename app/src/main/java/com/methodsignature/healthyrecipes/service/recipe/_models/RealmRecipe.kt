@@ -8,14 +8,12 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmObject
-import io.realm.kotlin.types.RealmUUID
 import io.realm.kotlin.types.annotations.PrimaryKey
 
 class RealmRecipe : RealmObject {
 
     @PrimaryKey
-    var _id: RealmUUID = RealmUUID.random()
-
+    var id: String = ""
     var description: String = ""
     var servings: String = ""
     var instructions: String = ""
@@ -24,6 +22,7 @@ class RealmRecipe : RealmObject {
     companion object {
         fun fromRecipe(recipe: Recipe): RealmRecipe {
             return RealmRecipe().apply {
+                id = recipe.id.value
                 description = recipe.description.value
                 servings = recipe.servings?.value ?: ""
                 instructions = recipe.instructions?.value ?: ""
@@ -36,10 +35,10 @@ class RealmRecipe : RealmObject {
         }
 
         fun RealmRecipe.toRecipe(): Recipe {
-            val rawRecipeId = _id.toString()
+            val rawRecipeId = id
             return Recipe(
                 id = EntityId.from(rawRecipeId)
-                    ?: throw MalformedDataException("invalid entity id: `$rawRecipeId`"),
+                    ?: throw MalformedDataException("invalid or missing recipe id: `$rawRecipeId`"),
                 description = NonBlankString.from(description)
                     ?: throw MalformedDataException("invalid `description`: `$description`"),
                 servings = NonBlankString.from(servings),

@@ -2,7 +2,8 @@ package com.methodsignature.healthyrecipes.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.methodsignature.healthyrecipes.usecase.SeedRecipeListUseCase
+import com.methodsignature.healthyrecipes.log.logError
+import com.methodsignature.healthyrecipes.usecase.UpdateAllRecipesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HealthyRecipesApplicationViewModel @Inject constructor(
-    private val seedRecipeListUseCase: SeedRecipeListUseCase,
+    private val updateAllRecipesUseCase: UpdateAllRecipesUseCase,
 ) : ViewModel() {
 
     sealed class NavigationEvent {
@@ -25,7 +26,11 @@ class HealthyRecipesApplicationViewModel @Inject constructor(
 
     fun onApplicationLaunch() {
         viewModelScope.launch {
-            seedRecipeListUseCase.run()
+            try {
+                updateAllRecipesUseCase.run()
+            } catch (throwable: Throwable) {
+                logError("Unable to update recipes on launch", throwable)
+            }
         }
     }
 

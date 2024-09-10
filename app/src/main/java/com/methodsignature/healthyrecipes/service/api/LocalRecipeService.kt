@@ -33,14 +33,19 @@ interface LocalRecipeService {
     suspend fun observeRecipe(id: EntityId): Flow<Recipe>
 
     /**
-     * Saves a recipe locally.
+     * Saves a recipe locally. Updates the recipe if it already exists.
      */
-    suspend fun saveRecipe(recipe: Recipe)
+    suspend fun upsertRecipe(recipe: Recipe)
 
     /**
-     * Saves a list of recipes locally.
+     * Saves a list of recipes locally. Updates any recipe that already exists.
      */
-    suspend fun saveRecipes(withRecipes: List<Recipe>)
+    suspend fun upsertRecipes(withRecipes: List<Recipe>)
+
+    /**
+     * Empties the list of recipes.
+     */
+    suspend fun deleteAllRecipes()
 }
 
 interface RemoteRecipeService {
