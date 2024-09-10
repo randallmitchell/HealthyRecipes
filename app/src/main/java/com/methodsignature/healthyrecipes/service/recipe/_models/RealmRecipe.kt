@@ -1,6 +1,6 @@
 package com.methodsignature.healthyrecipes.service.recipe._models
 
-import com.methodsignature.healthyrecipes.service.api.RecipeService
+import com.methodsignature.healthyrecipes.service.api.Recipe
 import com.methodsignature.healthyrecipes.service.errors.MalformedDataException
 import com.methodsignature.healthyrecipes.service.recipe._models.RealmIngredient.Companion.toIngredient
 import com.methodsignature.healthyrecipes.value.EntityId
@@ -8,22 +8,21 @@ import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmObject
-import io.realm.kotlin.types.RealmUUID
 import io.realm.kotlin.types.annotations.PrimaryKey
 
 class RealmRecipe : RealmObject {
 
     @PrimaryKey
-    var _id: RealmUUID = RealmUUID.random()
-
+    var id: String = ""
     var description: String = ""
     var servings: String = ""
     var instructions: String = ""
     var ingredients: RealmList<RealmIngredient> = realmListOf()
 
     companion object {
-        fun fromRecipe(recipe: RecipeService.Recipe): RealmRecipe {
+        fun fromRecipe(recipe: Recipe): RealmRecipe {
             return RealmRecipe().apply {
+                id = recipe.id.value
                 description = recipe.description.value
                 servings = recipe.servings?.value ?: ""
                 instructions = recipe.instructions?.value ?: ""
@@ -35,11 +34,11 @@ class RealmRecipe : RealmObject {
             }
         }
 
-        fun RealmRecipe.toRecipe(): RecipeService.Recipe {
-            val rawRecipeId = _id.toString()
-            return RecipeService.Recipe(
+        fun RealmRecipe.toRecipe(): Recipe {
+            val rawRecipeId = id
+            return Recipe(
                 id = EntityId.from(rawRecipeId)
-                    ?: throw MalformedDataException("invalid entity id: `$rawRecipeId`"),
+                    ?: throw MalformedDataException("invalid or missing recipe id: `$rawRecipeId`"),
                 description = NonBlankString.from(description)
                     ?: throw MalformedDataException("invalid `description`: `$description`"),
                 servings = NonBlankString.from(servings),

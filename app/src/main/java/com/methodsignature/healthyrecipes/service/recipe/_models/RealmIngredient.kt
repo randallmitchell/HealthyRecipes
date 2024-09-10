@@ -1,6 +1,6 @@
 package com.methodsignature.healthyrecipes.service.recipe._models
 
-import com.methodsignature.healthyrecipes.service.api.RecipeService
+import com.methodsignature.healthyrecipes.service.api.Ingredient
 import com.methodsignature.healthyrecipes.service.errors.MalformedDataException
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.realm.kotlin.types.EmbeddedRealmObject
@@ -13,7 +13,7 @@ class RealmIngredient() : EmbeddedRealmObject {
 
     companion object {
         fun fromIngredient(
-            ingredient: RecipeService.Ingredient
+            ingredient: Ingredient
         ): RealmIngredient {
             return RealmIngredient().apply {
                 units = ingredient.units.value
@@ -22,8 +22,8 @@ class RealmIngredient() : EmbeddedRealmObject {
             }
         }
 
-        fun RealmIngredient.toIngredient() : RecipeService.Ingredient {
-            return RecipeService.Ingredient(
+        fun RealmIngredient.toIngredient() : Ingredient {
+            return Ingredient(
                 units = NonBlankString.from(units)
                     ?: throw MalformedDataException("invalid `units`: `$units`"),
                 unitType = NonBlankString.from(unitType)

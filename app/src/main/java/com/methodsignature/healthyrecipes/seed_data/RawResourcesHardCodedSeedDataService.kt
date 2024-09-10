@@ -2,7 +2,7 @@ package com.methodsignature.healthyrecipes.seed_data
 
 import android.content.Context
 import com.methodsignature.healthyrecipes.service.api.HardCodedSeedDataService
-import com.methodsignature.healthyrecipes.service.api.RecipeService
+import com.methodsignature.healthyrecipes.service.api.Recipe
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
@@ -17,11 +17,11 @@ class RawResourcesHardCodedSeedDataService @Inject constructor(
 
     @JsonClass(generateAdapter = true)
     data class Recipes(
-        @field:Json(name = "recipes") val recipes: List<RecipeService.Recipe>
+        @field:Json(name = "recipes") val recipes: List<Recipe>
     )
 
     @OptIn(ExperimentalStdlibApi::class)
-    override suspend fun getInitialRecipeList(): List<RecipeService.Recipe> {
+    override suspend fun getInitialRecipeList(): List<Recipe> {
         val rawJson = context.resources.openRawResource(recipesResId).reader().readText()
         return moshi.adapter<Recipes>().fromJson(rawJson)?.recipes ?: listOf()
     }

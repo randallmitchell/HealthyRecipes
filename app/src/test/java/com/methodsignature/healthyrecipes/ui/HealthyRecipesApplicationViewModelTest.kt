@@ -2,7 +2,7 @@ package com.methodsignature.healthyrecipes.ui
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.usecase.SeedRecipeListUseCase
+import com.methodsignature.healthyrecipes.usecase.UpdateAllRecipesUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -12,16 +12,16 @@ import org.junit.Test
 
 class HealthyRecipesApplicationViewModelTest : BaseTest() {
 
-    private val seedRecipeListUseCase = mockk<SeedRecipeListUseCase>()
+    private val updateAllRecipesUseCase = mockk<UpdateAllRecipesUseCase>()
     private val tested = HealthyRecipesApplicationViewModel(
-        seedRecipeListUseCase = seedRecipeListUseCase,
+        updateAllRecipesUseCase = updateAllRecipesUseCase,
     )
 
     @Test
     fun `GIVEN the application is initialized THEN the database is seeded`() = runTest {
-        coEvery { seedRecipeListUseCase.run() } returns Unit
+        coEvery { updateAllRecipesUseCase.run() } returns Unit
         tested.onApplicationLaunch()
-        coVerify(exactly = 1) { seedRecipeListUseCase.run() }
+        coVerify(exactly = 1) { updateAllRecipesUseCase.run() }
     }
 
     @Test

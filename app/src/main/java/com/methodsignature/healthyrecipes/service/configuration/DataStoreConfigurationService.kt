@@ -3,8 +3,8 @@ package com.methodsignature.healthyrecipes.service.configuration
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.methodsignature.healthyrecipes.service.api.ConfigurationService
 import kotlinx.coroutines.flow.Flow
@@ -17,20 +17,21 @@ class DataStoreConfigurationService @Inject constructor(
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
 
-    override suspend fun setRecipeServiceAsSeeded() {
-        context.dataStore.edit { settings ->
-            settings[KEY_IS_RECIPE_SERVICE_SEEDED] = true
+    override suspend fun getRecipeSeedState(): Flow<ConfigurationService.RecipeSeedState> {
+        return context.dataStore.data.map { preferences ->
+            val raw = preferences[KEY_RECIPE_SEED_STATE] ?: 0
+            ConfigurationService.RecipeSeedState.fromInt(raw)
         }
     }
 
-    override suspend fun observeIsRecipeServiceSeeded(): Flow<Boolean> {
-        return context.dataStore.data.map { preferences ->
-            preferences[KEY_IS_RECIPE_SERVICE_SEEDED] ?: false
+    override suspend fun setRecipeSeedState(value: ConfigurationService.RecipeSeedState) {
+        context.dataStore.edit {preferences ->
+            preferences[KEY_RECIPE_SEED_STATE] = value.toInt()
         }
     }
 
     companion object {
         private const val DATA_STORE_NAME = "settings"
-        private val KEY_IS_RECIPE_SERVICE_SEEDED = booleanPreferencesKey("is_recipe_service_seeded")
+        private val KEY_RECIPE_SEED_STATE = intPreferencesKey("recipe_seed_state")
     }
 }

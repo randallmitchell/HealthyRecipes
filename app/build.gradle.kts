@@ -36,11 +36,13 @@ android {
             buildConfigField("boolean", "ENABLE_DEBUG_LOGGING", "false")
             buildConfigField("boolean", "ENABLE_OBSERVABILITY_LOGGING", "true")
             buildConfigField("String", "NEW_RELIC_API_KEY", rootProject.extra.get("NEW_RELIC_API_KEY").toString())
+            buildConfigField("String", "WORDPRESS_API_BASE_URL", rootProject.extra.get("WORDPRESS_API_BASE_URL").toString())
         }
         debug {
             buildConfigField("boolean", "ENABLE_DEBUG_LOGGING", "true")
             buildConfigField("boolean", "ENABLE_OBSERVABILITY_LOGGING", "true")
             buildConfigField("String", "NEW_RELIC_API_KEY", rootProject.extra.get("NEW_RELIC_API_KEY").toString())
+            buildConfigField("String", "WORDPRESS_API_BASE_URL", rootProject.extra.get("WORDPRESS_API_BASE_URL").toString())
         }
     }
 
@@ -79,6 +81,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.fuel)
     implementation(libs.google.dagger.hilt.android)
     kapt(libs.google.dagger.hilt.android.compiler)
     implementation(libs.newrelic)
