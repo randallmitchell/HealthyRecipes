@@ -3,7 +3,9 @@ package com.methodsignature.healthyrecipes.usecase
 import com.methodsignature.healthyrecipes.BaseTest
 import com.methodsignature.healthyrecipes.service.api.ConfigurationService
 import com.methodsignature.healthyrecipes.service.api.HardCodedSeedDataService
-import com.methodsignature.healthyrecipes.service.api.RecipeService
+import com.methodsignature.healthyrecipes.service.api.Ingredient
+import com.methodsignature.healthyrecipes.service.api.Recipe
+import com.methodsignature.healthyrecipes.service.api.LocalRecipeService
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -14,7 +16,7 @@ import kotlin.test.Test
 
 class SeedRecipeListUseCaseTest : BaseTest() {
 
-    private val recipeService = mockk<RecipeService>(relaxed = true)
+    private val recipeService = mockk<LocalRecipeService>(relaxed = true)
     private val configurationService = mockk<ConfigurationService>(relaxed = true)
     private val hardCodedSeedDataService = mockk<HardCodedSeedDataService>(relaxed = true)
 
@@ -25,14 +27,14 @@ class SeedRecipeListUseCaseTest : BaseTest() {
     )
 
     private object TestData {
-        val ingredient = RecipeService.Ingredient(
+        val ingredient = Ingredient(
             units = NonBlankString.from("1 1/2")!!,
             unitType = NonBlankString.from("cups")!!,
             name = NonBlankString.from("magic")!!,
         )
         val ingredients = listOf(ingredient)
 
-        val recipe = RecipeService.Recipe(
+        val recipe = Recipe(
             id = NonBlankString.from("1")!!,
             description = NonBlankString.from("description")!!,
             servings = null,

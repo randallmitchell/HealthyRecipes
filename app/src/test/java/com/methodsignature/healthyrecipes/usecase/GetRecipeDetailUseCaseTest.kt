@@ -2,13 +2,14 @@ package com.methodsignature.healthyrecipes.usecase
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.service.api.RecipeService
+import com.methodsignature.healthyrecipes.service.api.Ingredient
+import com.methodsignature.healthyrecipes.service.api.Recipe
+import com.methodsignature.healthyrecipes.service.api.LocalRecipeService
 import com.methodsignature.healthyrecipes.service.errors.EntityNotFoundException
 import com.methodsignature.healthyrecipes.value.EntityId
 import com.methodsignature.healthyrecipes.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
@@ -16,18 +17,18 @@ import org.junit.Test
 
 class GetRecipeDetailUseCaseTest : BaseTest() {
 
-    private val recipeService = mockk<RecipeService>()
+    private val recipeService = mockk<LocalRecipeService>()
     private val tested = GetRecipeDetailUseCase(recipeService)
 
     private object TestData {
-        val ingredient = RecipeService.Ingredient(
+        val ingredient = Ingredient(
             units = NonBlankString.from("1 1/2")!!,
             unitType = NonBlankString.from("cups")!!,
             name = NonBlankString.from("magic")!!,
         )
         val ingredients = listOf(ingredient)
 
-        val recipe = RecipeService.Recipe(
+        val recipe = Recipe(
             id = NonBlankString.from("1")!!,
             description = NonBlankString.from("description")!!,
             servings = null,

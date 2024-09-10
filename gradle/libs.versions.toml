@@ -6,6 +6,7 @@ agp = "8.2.2"
 composeBom = "2024.05.00"
 composeConstraintLayout = "1.0.1"
 coreKtx = "1.13.1"
+fuel = "3.0.0-alpha03"
 googleDaggerHilt = "2.51.1"
 junit = "4.13.2"
 kluent = "1.72"
@@ -39,6 +40,7 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 cash-turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+fuel = { group = "com.github.kittinunf.fuel", name = "fuel", version.ref = "fuel" }
 google-dagger-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "googleDaggerHilt" }
 google-dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "googleDaggerHilt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

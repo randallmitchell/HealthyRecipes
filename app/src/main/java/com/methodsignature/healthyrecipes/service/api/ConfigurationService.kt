@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 interface ConfigurationService {
 
     /**
-     * call when the [RecipeService] has been seeded on app's first run.
+     * call when the [LocalRecipeService] has been seeded on app's first run.
      */
     suspend fun setRecipeServiceAsSeeded()
 

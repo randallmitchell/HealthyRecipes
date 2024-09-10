@@ -9,5 +9,5 @@ interface HardCodedSeedDataService {
     /**
      * Provides an initial list or recipes for which
      */
-    suspend fun getInitialRecipeList(): List<RecipeService.Recipe>
+    suspend fun getInitialRecipeList(): List<Recipe>
 }

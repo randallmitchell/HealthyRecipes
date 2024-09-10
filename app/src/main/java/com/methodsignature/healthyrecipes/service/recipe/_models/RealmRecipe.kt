@@ -1,6 +1,6 @@
 package com.methodsignature.healthyrecipes.service.recipe._models
 
-import com.methodsignature.healthyrecipes.service.api.RecipeService
+import com.methodsignature.healthyrecipes.service.api.Recipe
 import com.methodsignature.healthyrecipes.service.errors.MalformedDataException
 import com.methodsignature.healthyrecipes.service.recipe._models.RealmIngredient.Companion.toIngredient
 import com.methodsignature.healthyrecipes.value.EntityId
@@ -22,7 +22,7 @@ class RealmRecipe : RealmObject {
     var ingredients: RealmList<RealmIngredient> = realmListOf()
 
     companion object {
-        fun fromRecipe(recipe: RecipeService.Recipe): RealmRecipe {
+        fun fromRecipe(recipe: Recipe): RealmRecipe {
             return RealmRecipe().apply {
                 description = recipe.description.value
                 servings = recipe.servings?.value ?: ""
@@ -35,9 +35,9 @@ class RealmRecipe : RealmObject {
             }
         }
 
-        fun RealmRecipe.toRecipe(): RecipeService.Recipe {
+        fun RealmRecipe.toRecipe(): Recipe {
             val rawRecipeId = _id.toString()
-            return RecipeService.Recipe(
+            return Recipe(
                 id = EntityId.from(rawRecipeId)
                     ?: throw MalformedDataException("invalid entity id: `$rawRecipeId`"),
                 description = NonBlankString.from(description)
