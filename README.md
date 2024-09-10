@@ -7,7 +7,7 @@ For now the codebase is handling a larger set of topics but handling them each i
 - The packages structure needs It's first pass on organization.
   - The higher level packages should be converted into build modules in order to protect the various parts of the code from eachother.
   - The root dependency is the `usecase` package/module so it should not depend on other modules. This is where the business rules live and where _the important_ testing goes.
-  - `Services` should not depend on other `services`. (predictibility/mutability/extensibility/accessibity)
+  - `Services` should not depend on other `services`. (predictibility/mutability/extensibility/accessibility)
  
 # General concepts
 - Module dependency hierarchy: `view` -> `viewmodel` -> `usecase` <- `service`.
