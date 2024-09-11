@@ -2,7 +2,8 @@ package com.methodsignature.healthyrecipes.ui
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.ui.ApplicationRouterViewModel.NavigationEvent
+import com.methodsignature.healthyrecipes.ui.flow.ApplicationRouterViewModel
+import com.methodsignature.healthyrecipes.ui.flow.ApplicationRouterViewModel.NavigationEvent
 import kotlinx.coroutines.test.runTest
 import org.amshove.kluent.shouldBeEqualTo
 import kotlin.test.Test

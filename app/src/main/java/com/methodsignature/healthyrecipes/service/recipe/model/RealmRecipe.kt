@@ -1,10 +1,10 @@
 package com.methodsignature.healthyrecipes.service.recipe.model
 
-import com.methodsignature.healthyrecipes.service.api.recipe.model.Recipe
-import com.methodsignature.healthyrecipes.service.errors.MalformedDataException
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Recipe
+import com.methodsignature.healthyrecipes.service._api.errors.MalformedDataException
 import com.methodsignature.healthyrecipes.service.recipe.model.RealmIngredient.Companion.toIngredient
-import com.methodsignature.healthyrecipes.value.EntityId
-import com.methodsignature.healthyrecipes.value.NonBlankString
+import com.methodsignature.healthyrecipes.language.value.EntityId
+import com.methodsignature.healthyrecipes.language.value.NonBlankString
 import io.realm.kotlin.ext.realmListOf
 import io.realm.kotlin.types.RealmList
 import io.realm.kotlin.types.RealmObject

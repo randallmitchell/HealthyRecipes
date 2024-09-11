@@ -1,15 +1,15 @@
 package com.methodsignature.healthyrecipes.service.recipe
 
-import com.methodsignature.healthyrecipes.service.api.recipe.model.Ingredient
-import com.methodsignature.healthyrecipes.service.api.recipe.model.Recipe
-import com.methodsignature.healthyrecipes.service.api.recipe.RemoteRecipeService
-import com.methodsignature.healthyrecipes.service.errors.EntityNotFoundException
-import com.methodsignature.healthyrecipes.service.errors.MalformedDataException
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Ingredient
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Recipe
+import com.methodsignature.healthyrecipes.service._api.recipe.RemoteRecipeService
+import com.methodsignature.healthyrecipes.service._api.errors.EntityNotFoundException
+import com.methodsignature.healthyrecipes.service._api.errors.MalformedDataException
 import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.Acf.Companion.toRecipe
 import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.Ingredient.Companion.toIngredient
 import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.RecipeResponseItem.Companion.toRecipe
-import com.methodsignature.healthyrecipes.value.EntityId
-import com.methodsignature.healthyrecipes.value.NonBlankString
+import com.methodsignature.healthyrecipes.language.value.EntityId
+import com.methodsignature.healthyrecipes.language.value.NonBlankString
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
@@ -85,7 +85,7 @@ class WordpressRemoteRecipeService @Inject constructor(
         val name: String,
     ) {
         companion object {
-            fun Ingredient.toIngredient(recipeId: EntityId): com.methodsignature.healthyrecipes.service.api.recipe.model.Ingredient {
+            fun Ingredient.toIngredient(recipeId: EntityId): com.methodsignature.healthyrecipes.service._api.recipe.model.Ingredient {
                 return Ingredient(
                     units = NonBlankString.from(units)
                         ?: throw MalformedDataException("Unable to parse ingredient `units` for recipe ${recipeId.value}."),

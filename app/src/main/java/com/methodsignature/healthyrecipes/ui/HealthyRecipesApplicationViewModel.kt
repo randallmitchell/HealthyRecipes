@@ -2,7 +2,7 @@ package com.methodsignature.healthyrecipes.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.methodsignature.healthyrecipes.log.logError
+import com.methodsignature.healthyrecipes.observability.logError
 import com.methodsignature.healthyrecipes.usecase.UpdateAllRecipesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

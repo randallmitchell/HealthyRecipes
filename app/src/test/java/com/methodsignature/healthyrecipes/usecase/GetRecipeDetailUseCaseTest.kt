@@ -2,12 +2,12 @@ package com.methodsignature.healthyrecipes.usecase
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.service.api.recipe.model.Ingredient
-import com.methodsignature.healthyrecipes.service.api.recipe.model.Recipe
-import com.methodsignature.healthyrecipes.service.api.recipe.LocalRecipeService
-import com.methodsignature.healthyrecipes.service.errors.EntityNotFoundException
-import com.methodsignature.healthyrecipes.value.EntityId
-import com.methodsignature.healthyrecipes.value.NonBlankString
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Ingredient
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Recipe
+import com.methodsignature.healthyrecipes.service._api.recipe.LocalRecipeService
+import com.methodsignature.healthyrecipes.service._api.errors.EntityNotFoundException
+import com.methodsignature.healthyrecipes.language.value.EntityId
+import com.methodsignature.healthyrecipes.language.value.NonBlankString
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flow
