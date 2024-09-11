@@ -1,12 +1,10 @@
 package com.methodsignature.healthyrecipes
 
 import android.app.Application
-import com.methodsignature.healthyrecipes.observability.stability.NewRelicObservabilityLogTree
+import com.methodsignature.healthyrecipes.observability.NewRelicObservabilityLogTree
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.runInterruptible
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 

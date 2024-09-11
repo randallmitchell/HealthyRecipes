@@ -1,5 +1,6 @@
 package com.methodsignature.healthyrecipes.value
 
+import com.methodsignature.healthyrecipes.language.value.NonBlankString
 import org.amshove.kluent.`should be equal to`
 import org.junit.Test
 

@@ -1,11 +1,11 @@
 package com.methodsignature.healthyrecipes.usecase
 
 import com.methodsignature.healthyrecipes.language.DoNothing
-import com.methodsignature.healthyrecipes.service.api.ConfigurationService
-import com.methodsignature.healthyrecipes.service.api.ConfigurationService.RecipeSeedState
-import com.methodsignature.healthyrecipes.service.api.recipe.HardCodedSeedDataService
-import com.methodsignature.healthyrecipes.service.api.recipe.LocalRecipeService
-import com.methodsignature.healthyrecipes.service.api.recipe.RemoteRecipeService
+import com.methodsignature.healthyrecipes.service._api.configuration.ConfigurationService
+import com.methodsignature.healthyrecipes.service._api.configuration.ConfigurationService.RecipeSeedState
+import com.methodsignature.healthyrecipes.service._api.recipe.HardCodedSeedDataService
+import com.methodsignature.healthyrecipes.service._api.recipe.LocalRecipeService
+import com.methodsignature.healthyrecipes.service._api.recipe.RemoteRecipeService
 import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
