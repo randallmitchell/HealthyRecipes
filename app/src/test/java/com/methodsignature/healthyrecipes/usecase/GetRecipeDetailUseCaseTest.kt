@@ -2,12 +2,12 @@ package com.methodsignature.healthyrecipes.usecase
 
 import app.cash.turbine.test
 import com.methodsignature.healthyrecipes.BaseTest
-import com.methodsignature.healthyrecipes.service._api.recipe.model.Ingredient
-import com.methodsignature.healthyrecipes.service._api.recipe.model.Recipe
-import com.methodsignature.healthyrecipes.service._api.recipe.LocalRecipeService
-import com.methodsignature.healthyrecipes.service._api.errors.EntityNotFoundException
 import com.methodsignature.healthyrecipes.language.value.EntityId
 import com.methodsignature.healthyrecipes.language.value.NonBlankString
+import com.methodsignature.healthyrecipes.service._api.errors.EntityNotFoundException
+import com.methodsignature.healthyrecipes.service._api.recipe.LocalRecipeService
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Ingredient
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Recipe
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flow
@@ -39,7 +39,7 @@ class GetRecipeDetailUseCaseTest : BaseTest() {
     }
 
     @Test
-    fun onEntityNotFound_raise() = runTest {
+    fun `GIVEN entity not found raised THEN raise the exception`() = runTest {
         // GIVEN the recipe service returns entity not found exception
         coEvery { recipeService.observeRecipe(any()) } throws EntityNotFoundException("Entity not found.")
 
@@ -52,7 +52,7 @@ class GetRecipeDetailUseCaseTest : BaseTest() {
     }
 
     @Test
-    fun onRecipe_returnRecipe() = runTest {
+    fun `GIVEN recipe requested THEN return recipe`() = runTest {
         // GIVEN a recipe is returned
         coEvery { recipeService.observeRecipe(TestData.recipe.id) } returns flow { emit(TestData.recipe) }
 

@@ -7,12 +7,15 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RawResourcesHardCodedSeedDataService @Inject constructor(
     private val context: Context,
     private val recipesResId: Int,
     private val moshi: Moshi,
+    private val ioDispatcher: CoroutineDispatcher,
 ) : HardCodedSeedDataService {
 
     @JsonClass(generateAdapter = true)
@@ -21,8 +24,8 @@ class RawResourcesHardCodedSeedDataService @Inject constructor(
     )
 
     @OptIn(ExperimentalStdlibApi::class)
-    override suspend fun getInitialRecipeList(): List<Recipe> {
+    override suspend fun getInitialRecipeList(): List<Recipe> = withContext(ioDispatcher) {
         val rawJson = context.resources.openRawResource(recipesResId).reader().readText()
-        return moshi.adapter<Recipes>().fromJson(rawJson)?.recipes ?: listOf()
+        moshi.adapter<Recipes>().fromJson(rawJson)?.recipes ?: listOf()
     }
 }
