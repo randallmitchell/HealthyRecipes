@@ -1,10 +1,11 @@
-This code is under construction and doesn't fully reflect my thoughts on design and architecture. When done it should be a solid general purpose application codebase that can be modified to work for most small to medium size business domains that have use for an Android application. The architecture is generic and focuses on predictability, maliability, and extensability. Really, the architecture should go pretty far (once done) and is largely proven in the wild under a very small sample set. Things have been reevaluated and adjusted over time - generally with good results.
+This code is under construction and doesn't fully reflect my thoughts on design and architecture. When done it should be a solid general purpose application codebase that can be modified to work for most small to medium size business domains that have use for an Android application. The architecture is generic and focuses on predictability, maliability, extensability, and accessibility. Really, the architecture should go pretty far (once done) and is largely proven in the wild under a very small sample set. Things have been reevaluated and adjusted over time - generally with good results.
 
 For now the codebase is handling a larger set of topics but handling them each in a more trivial nature. Essentially, the architecture is closing towards robust but is not exercised in a robust way through nuanced real world requirements. In abstract but simple terms, the boxes are there but don't have much in them.
 
 # Things that need more immediate attention
 - The UI/UX is missing essential experience mechanics (e.g. a title bar). This will take a while to get to.
-- The packages structure needs It's first pass on organization.
+- The packages structure needs it's first pass on organization.
+  - [done] Packages are somewhat disorganized so should be refactored.
   - The higher level packages should be converted into build modules in order to protect the various parts of the code from eachother.
   - The root dependency is the `usecase` package/module so it should not depend on other modules. This is where the business rules live and where _the important_ testing goes.
   - `Services` should not depend on other `services`. (predictibility/mutability/extensibility)
@@ -16,7 +17,7 @@ For now the codebase is handling a larger set of topics but handling them each i
   - `extensibility` : how easy is it to add to as the domain grows?
   - `accessibility` : how easy is it for developers to understand?
 - Module dependency hierarchy: `view` -> `viewmodel` -> `usecase` <- `service`.
-- Arhitecture/design attempts to support some SOLID programming principles
+- The architecture is designed with some SOLID programming principles in mind
   - Single Responsibility : who is going to request a change?
     - ui rules are controlled by the design owner. those are isolated to the `view` layer.
     - ux rules are controlled by the user experience owner. those are isolated to the `viewmodel` layer.
@@ -24,7 +25,7 @@ For now the codebase is handling a larger set of topics but handling them each i
     - individual remote services are controlled by the system architect. each remote service's mechanics are wrapped and isolated to their own `services`.
     - local databases and other similar local functions are controlled by the application architect. those are isolated to their own `services`.
   - Interface Segregation Principle
-    - `Usecases` favor this over `viewmodels` talking directly to `repositories`.
+    - `Usecases` favor this over `viewmodels` talking directly to `repositories`. [Isolating and abstracting the backend also favors mutability.]
   - Dependency Inversion
     - The `service` layer should depend on the `usecase` layer so as to protect the `usecase`'s enclosed business rules. In that way the `usecase` layer should define all `service` interfaces.
 - `Usecase` tests validate business rules.
@@ -37,13 +38,13 @@ For now the codebase is handling a larger set of topics but handling them each i
 
 # Big ticket functional tech items for the near future
 - ~~error handling~~
-- api support
+- ~~api support~~
 - analaytics service
-- see [issues](https://github.com/randallmitchell/HealthyRecipes/issues) for more
+- see [issues](https://github.com/randallmitchell/HealthyRecipes/issues) for some additional smaller issues
 - i'm planning on building out the wiki in this GitHub project with architecture and design documentation along with some related educational direction.
 - authentication and authorization
 
-# Build Notes
+# Build/Compilation Notes
 
 ## Seed Data
 Create a json file at `/app/src/main/res/raw/local_recipes.json` using the format
