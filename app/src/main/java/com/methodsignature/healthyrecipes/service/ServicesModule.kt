@@ -104,11 +104,13 @@ object ServiceModule {
     fun provideRemoteRecipeService(
         fuel: HttpLoader,
         moshi: Moshi,
+        @IoDispatcher ioDispatcher: CoroutineDispatcher,
     ): RemoteRecipeService {
         return WordpressRemoteRecipeService(
             fuel = fuel,
             moshi = moshi,
             baseServiceUrl = NonBlankString.from(BuildConfig.WORDPRESS_API_BASE_URL)!!,
+            ioDispatcher = ioDispatcher,
         )
     }
 }
