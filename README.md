@@ -77,5 +77,3 @@ Create the file: `gradle/remote_services_configs.properties` with content
 NEW_RELIC_API_KEY="{value}"
 ```
 
-# Coming Soon
-APIs
