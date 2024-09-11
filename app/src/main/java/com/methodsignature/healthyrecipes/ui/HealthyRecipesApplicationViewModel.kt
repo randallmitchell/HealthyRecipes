@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.methodsignature.healthyrecipes.observability.logError
 import com.methodsignature.healthyrecipes.usecase.UpdateAllRecipesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -29,6 +30,9 @@ class HealthyRecipesApplicationViewModel @Inject constructor(
             try {
                 updateAllRecipesUseCase.run()
             } catch (throwable: Throwable) {
+                if (throwable is CancellationException) {
+                    throw throwable
+                }
                 logError("Unable to update recipes on launch", throwable)
             }
         }

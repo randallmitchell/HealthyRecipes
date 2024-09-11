@@ -13,7 +13,6 @@ suspend fun <T> Flow<T>.catchWithLogging(
     logError(logMessage, throwable)
     if (throwable is CancellationException) {
         throw throwable
-    } else {
-        action(throwable)
     }
+    action(throwable)
 }

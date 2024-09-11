@@ -6,6 +6,7 @@ import com.methodsignature.healthyrecipes.service._api.configuration.Configurati
 import com.methodsignature.healthyrecipes.service._api.recipe.HardCodedSeedDataService
 import com.methodsignature.healthyrecipes.service._api.recipe.LocalRecipeService
 import com.methodsignature.healthyrecipes.service._api.recipe.RemoteRecipeService
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.take
 import javax.inject.Inject
 
@@ -24,6 +25,9 @@ class UpdateAllRecipesUseCase @Inject constructor(
                         localRecipeService.upsertRecipes(recipes)
                         configurationService.setRecipeSeedState(RecipeSeedState.SEED_PROCESSES_COMPLETE)
                     } catch (t: Throwable) {
+                        if (t is CancellationException) {
+                            throw t
+                        }
                         val recipes = hardCodedSeedDataService.getInitialRecipeList()
                         localRecipeService.upsertRecipes(recipes)
                         configurationService.setRecipeSeedState(RecipeSeedState.HARD_CODED)
@@ -36,6 +40,9 @@ class UpdateAllRecipesUseCase @Inject constructor(
                         localRecipeService.upsertRecipes(recipes)
                         configurationService.setRecipeSeedState(RecipeSeedState.SEED_PROCESSES_COMPLETE)
                     } catch (t: Throwable) {
+                        if (t is CancellationException) {
+                            throw t
+                        }
                         DoNothing("Do not seed again.")
                     }
                 }
