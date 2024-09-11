@@ -20,8 +20,8 @@ import androidx.constraintlayout.compose.Dimension
 import com.methodsignature.healthyrecipes.R
 import com.methodsignature.healthyrecipes.ui.animation.slideInFromBottom
 import com.methodsignature.healthyrecipes.ui.animation.slideOutPastBottom
-import com.methodsignature.healthyrecipes.ui.component.Body
-import com.methodsignature.healthyrecipes.ui.component.ClickableLink
+import com.methodsignature.healthyrecipes.ui.component.element.Body
+import com.methodsignature.healthyrecipes.ui.component.element.ClickableLink
 import com.methodsignature.healthyrecipes.ui.theme.Colors
 
 object MessageBar {

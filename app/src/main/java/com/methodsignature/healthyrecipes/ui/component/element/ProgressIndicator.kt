@@ -1,4 +1,4 @@
-package com.methodsignature.healthyrecipes.ui.component
+package com.methodsignature.healthyrecipes.ui.component.element
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

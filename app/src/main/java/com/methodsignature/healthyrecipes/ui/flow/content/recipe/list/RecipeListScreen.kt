@@ -18,9 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.methodsignature.healthyrecipes.R
-import com.methodsignature.healthyrecipes.ui.component.Body
-import com.methodsignature.healthyrecipes.ui.component.CenterInSpaceProgressIndicator
-import com.methodsignature.healthyrecipes.ui.component.Heading1
+import com.methodsignature.healthyrecipes.ui.component.element.Body
+import com.methodsignature.healthyrecipes.ui.component.element.CenterInSpaceProgressIndicator
+import com.methodsignature.healthyrecipes.ui.component.element.Heading1
 import com.methodsignature.healthyrecipes.ui.component.dialog.MessageBar
 import com.methodsignature.healthyrecipes.ui.component.screen.Background
 import com.methodsignature.healthyrecipes.ui.component.screen.Screen
