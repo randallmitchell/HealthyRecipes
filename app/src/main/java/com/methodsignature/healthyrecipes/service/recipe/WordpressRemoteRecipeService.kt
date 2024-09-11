@@ -1,43 +1,46 @@
 package com.methodsignature.healthyrecipes.service.recipe
 
-import com.methodsignature.healthyrecipes.service._api.recipe.model.Ingredient
-import com.methodsignature.healthyrecipes.service._api.recipe.model.Recipe
-import com.methodsignature.healthyrecipes.service._api.recipe.RemoteRecipeService
+import com.methodsignature.healthyrecipes.language.value.EntityId
+import com.methodsignature.healthyrecipes.language.value.NonBlankString
 import com.methodsignature.healthyrecipes.service._api.errors.EntityNotFoundException
 import com.methodsignature.healthyrecipes.service._api.errors.MalformedDataException
+import com.methodsignature.healthyrecipes.service._api.recipe.RemoteRecipeService
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Ingredient
+import com.methodsignature.healthyrecipes.service._api.recipe.model.Recipe
 import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.Acf.Companion.toRecipe
 import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.Ingredient.Companion.toIngredient
 import com.methodsignature.healthyrecipes.service.recipe.WordpressRemoteRecipeService.RecipeResponseItem.Companion.toRecipe
-import com.methodsignature.healthyrecipes.language.value.EntityId
-import com.methodsignature.healthyrecipes.language.value.NonBlankString
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapter
 import fuel.HttpLoader
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @OptIn(ExperimentalStdlibApi::class)
 class WordpressRemoteRecipeService @Inject constructor(
-    val fuel: HttpLoader,
-    val moshi: Moshi,
+    private val fuel: HttpLoader,
+    private val moshi: Moshi,
     baseServiceUrl: NonBlankString,
+    private val ioDispatcher: CoroutineDispatcher,
 ) : RemoteRecipeService {
 
     private val recipesEndpoint = "${baseServiceUrl.value}/recipe"
 
-    override suspend fun getAllRecipes(): List<Recipe> {
+    override suspend fun getAllRecipes(): List<Recipe> = withContext(ioDispatcher) {
         val raw: String = fuel.get(request = { url = recipesEndpoint }).body.string()
         val data = moshi.adapter<List<RecipeResponseItem>>().fromJson(raw)
             ?: throw EntityNotFoundException("Unable to get recipes from endpoint.")
-        return data.map { it.toRecipe() }
+        data.map { it.toRecipe() }
     }
 
-    override suspend fun getRecipe(id: EntityId): Recipe {
+    override suspend fun getRecipe(id: EntityId): Recipe = withContext(ioDispatcher) {
         val raw: String = fuel.get(request = { url = "recipesEndpoint/${id.value}" }).body.string()
         val data = moshi.adapter<RecipeResponseItem>().fromJson(raw)
             ?: throw MalformedDataException("Unable to parse recipe with id ${id.value}.")
-        return data.toRecipe()
+        data.toRecipe()
     }
 
     @JsonClass(generateAdapter = true)
